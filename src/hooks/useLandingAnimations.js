@@ -11,23 +11,26 @@ export function useLandingAnimations() {
   useGSAP(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return;
+    const compactMotion = window.matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     gsap.utils.toArray('[data-reveal]').forEach((element) => {
-      gsap.from(element, { autoAlpha: 0, y: 44, scale: .985, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 88%', toggleActions: 'play none none reverse' } });
+      gsap.from(element, { autoAlpha: 0, y: compactMotion ? 22 : 44, scale: compactMotion ? 1 : .985, duration: compactMotion ? .65 : 1, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 90%', toggleActions: 'play none none none', once: true } });
     });
 
     gsap.utils.toArray('.section-intro').forEach((intro) => {
       const timeline = gsap.timeline({
         defaults: { ease: 'power4.out' },
-        scrollTrigger: { trigger: intro, start: 'top 82%', toggleActions: 'play none none reverse' },
+        scrollTrigger: { trigger: intro, start: 'top 86%', toggleActions: 'play none none none', once: true },
       });
       timeline
         .from(intro.querySelector('.section-intro__index'), { autoAlpha: 0, x: -18, duration: .65 })
-        .from(intro.querySelector('h2'), { autoAlpha: 0, yPercent: 38, rotationX: -10, transformOrigin: '50% 100%', duration: 1 }, '<.08')
+        .from(intro.querySelector('h2'), { autoAlpha: 0, yPercent: compactMotion ? 18 : 38, rotationX: compactMotion ? 0 : -10, transformOrigin: '50% 100%', duration: compactMotion ? .7 : 1 }, '<.08')
         .from(intro.querySelector('.section-intro__copy'), { autoAlpha: 0, y: 20, duration: .75 }, '<.22');
     });
 
-    gsap.to('.hero__image', {
+    if (!compactMotion) {
+      gsap.to('.hero__image', {
       yPercent: 10,
       scale: 1.08,
       ease: 'none',
@@ -48,9 +51,10 @@ export function useLandingAnimations() {
 
     gsap.fromTo('[data-closing-art]', { xPercent: -3, scale: 1.08 }, { xPercent: 3, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '.closing', start: 'top bottom', end: 'bottom top', scrub: 1 } });
 
-    gsap.utils.toArray('.community__cards .reference-slice').forEach((element, index) => {
-      gsap.fromTo(element, { yPercent: -7, scale: 1.12 }, { yPercent: 7, scale: 1.12, ease: 'none', scrollTrigger: { trigger: element.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 + index * 0.12 } });
-    });
+      gsap.utils.toArray('.community__cards .reference-slice').forEach((element, index) => {
+        gsap.fromTo(element, { yPercent: -7, scale: 1.12 }, { yPercent: 7, scale: 1.12, ease: 'none', scrollTrigger: { trigger: element.parentElement, start: 'top bottom', end: 'bottom top', scrub: 1 + index * 0.12 } });
+      });
+    }
 
     const communityCleanups = [];
     if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -77,12 +81,14 @@ export function useLandingAnimations() {
     gsap.utils.toArray('.gallery__item').forEach((card, index) => {
       gsap.fromTo(card,
         { y: 54 + index * 8, rotation: index % 2 ? 1.2 : -1.2, scale: .96 },
-        { y: 0, rotation: 0, scale: 1, duration: 1.15, ease: 'power4.out', scrollTrigger: { trigger: card, start: 'top 92%', toggleActions: 'play none none reverse' } },
+        { y: 0, rotation: 0, scale: 1, duration: 1.15, ease: 'power4.out', scrollTrigger: { trigger: card, start: 'top 92%', toggleActions: 'play none none none', once: true } },
       );
-      gsap.fromTo(card.querySelector('img'),
-        { yPercent: -4, scale: 1.08 },
-        { yPercent: 4, scale: 1.08, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: .9 } },
-      );
+      if (!compactMotion) {
+        gsap.fromTo(card.querySelector('img'),
+          { yPercent: -4, scale: 1.08 },
+          { yPercent: 4, scale: 1.08, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: .9 } },
+        );
+      }
     });
 
     const interactive = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -108,9 +114,11 @@ export function useLandingAnimations() {
         });
       });
     }
-    gsap.utils.toArray('[data-float]').forEach((element, index) => {
-      gsap.to(element, { y: index % 2 ? 10 : -12, rotation: index % 2 ? .5 : -.5, duration: 3.8 + index * .35, ease: 'sine.inOut', repeat: -1, yoyo: true });
-    });
+    if (!compactMotion) {
+      gsap.utils.toArray('[data-float]').forEach((element, index) => {
+        gsap.to(element, { y: index % 2 ? 10 : -12, rotation: index % 2 ? .5 : -.5, duration: 3.8 + index * .35, ease: 'sine.inOut', repeat: -1, yoyo: true });
+      });
+    }
 
     const refresh = () => ScrollTrigger.refresh();
     window.addEventListener('load', refresh, { once: true });

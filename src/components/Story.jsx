@@ -32,7 +32,7 @@ export function Story() {
         <div className="phone" data-phone>
           <div className="phone__island" />
           <div className="phone__screen">
-            <img className="phone__screen-image" src={`${import.meta.env.BASE_URL}aurelis-app-dashboard.png`} alt="Aurelis member app home dashboard" />
+            <img className="phone__screen-image" src={`${import.meta.env.BASE_URL}aurelis-app-dashboard.webp`} alt="Aurelis member app home dashboard" loading="lazy" decoding="async" />
           </div>
         </div>
         <div className="feature-list">

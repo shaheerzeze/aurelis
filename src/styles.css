@@ -72,8 +72,8 @@ main { margin-left: var(--sidebar); }
 
 .hero { min-height: 790px; position: relative; display: grid; align-items: center; isolation: isolate; overflow: hidden; }
 .hero::before { content:none; }
-.reference-slice { background-image: url('/aurelis-reference.png'); background-repeat: no-repeat; }
-.hero__image { position: absolute; inset: -5% 0; z-index: -3; background: url('/aurelis-hero-branded.png') center center / cover no-repeat; filter: saturate(.82) contrast(1.08) brightness(.82); transform-origin: center; will-change: transform; }
+.reference-slice { background-image: url('/aurelis-reference.webp'); background-repeat: no-repeat; }
+.hero__image { position: absolute; inset: -5% 0; z-index: -3; background: url('/aurelis-hero-branded.webp') center center / cover no-repeat; filter: saturate(.82) contrast(1.08) brightness(.82); transform-origin: center; will-change: transform; }
 .hero__shade { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg, rgba(7,8,13,.94) 0%, rgba(7,8,13,.78) 28%, rgba(7,8,13,.18) 60%, rgba(7,8,13,.08) 100%), linear-gradient(0deg, var(--navy-950) 0, transparent 27%); }
 .hero__content { width: min(560px, 48vw); margin-left: 8%; padding-top: 8px; }
 .eyebrow { color: var(--gold-300); text-transform: uppercase; letter-spacing: .24em; font-size: 11px; font-weight: 500; }
@@ -108,9 +108,9 @@ main { margin-left: var(--sidebar); }
 .journey-line__light { stroke: url('#routeGold'); stroke-width: 1.1; opacity: .98; }
 .journey-line__accent { stroke: #ffe79a; stroke-width: 2.4; stroke-dasharray: 12 250 95 420 34 310; opacity: .76; filter: drop-shadow(0 0 5px rgba(255,225,132,.9)); }
 .visual-panel { position: absolute; overflow: hidden; border: 0; }
-.story__club { left: 0; top: 130px; width: 32%; height: 430px; background: url('/aurelis-lounge.png') center / cover no-repeat; mask-image: linear-gradient(90deg,#000 72%,transparent); }
+.story__club { left: 0; top: 130px; width: 32%; height: 430px; background: url('/aurelis-lounge.webp') center / cover no-repeat; mask-image: linear-gradient(90deg,#000 72%,transparent); }
 .story__club-copy { position: absolute; top: 190px; left: 32%; width: 29%; }
-.story__court { right: 3%; top: 430px; width: 37%; height: 480px; background: url('/aurelis-court-branded.png') center / cover no-repeat; mask-image: radial-gradient(ellipse,#000 52%,transparent 80%); }
+.story__court { right: 3%; top: 430px; width: 37%; height: 480px; background: url('/aurelis-court-branded.webp') center / cover no-repeat; mask-image: radial-gradient(ellipse,#000 52%,transparent 80%); }
 .story__court-copy { position: absolute; top: 540px; right: 35%; width: 29%; }
 .section-intro__index { color: var(--gold-500); font-size: 16px; letter-spacing: .05em; }
 .section-intro__index span { display: block; margin-top: 5px; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; }
@@ -163,7 +163,7 @@ main { margin-left: var(--sidebar); }
 .community { min-height: 760px; position: relative; z-index: 2; padding: 120px 6%; display: grid; grid-template-columns: .7fr 1.3fr; gap: 6vw; align-items: center; background: linear-gradient(180deg,rgba(7,8,13,.38),rgba(8,11,17,.78)); }
 .community__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .community__cards article { min-height: 390px; padding: 14px; border: 1px solid rgba(212,175,55,.18); display: flex; flex-direction: column; justify-content: flex-end; background: var(--navy-800); }
-.community__cards .reference-slice { position: absolute; inset: -4%; background-image: url('/aurelis-community.png'); background-size: 300% auto; background-position: var(--slice-position); background-repeat:no-repeat; filter: brightness(.62) saturate(.82); z-index: -1; }
+.community__cards .reference-slice { position: absolute; inset: -4%; background-image: url('/aurelis-community.webp'); background-size: 300% auto; background-position: var(--slice-position); background-repeat:no-repeat; filter: brightness(.62) saturate(.82); z-index: -1; }
 .community__cards article { position: relative; isolation: isolate; overflow: hidden; }
 .community__cards article::after { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(transparent 35%,rgba(7,8,13,.96)); }
 .community__cards h3 { color: var(--gold-300); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
@@ -214,7 +214,7 @@ main { margin-left: var(--sidebar); }
 .closing { min-height: 520px; position: relative; padding: 70px 10%; display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; gap: 3vw; overflow: hidden; isolation:isolate; border-top: 1px solid rgba(212,175,55,.15); background:#07080d; }
 .closing::before { content:''; position:absolute; z-index:1; width:500px; height:500px; right:-190px; bottom:-330px; border:2px solid var(--gold-300); border-radius:50%; box-shadow:0 0 14px var(--gold-500); }
 .closing::after { content:''; position:absolute; z-index:0; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(7,8,13,.04),rgba(7,8,13,.12) 42%,rgba(7,8,13,.9) 68%,#07080d 100%); }
-.closing__art { position:absolute; z-index:-1; inset:-8%; background:url('/aurelis-closing-ball.png') center/cover no-repeat; will-change:transform; }
+.closing__art { position:absolute; z-index:-1; inset:-8%; background:url('/aurelis-closing-ball.webp') center/cover no-repeat; will-change:transform; }
 .closing__copy { position:relative; z-index:2; }
 .closing__orb { width: 270px; aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 45% 36%,#1d2022,#050609 60%); box-shadow: 0 0 0 2px rgba(212,175,55,.4), 0 0 60px rgba(212,175,55,.26); }
 .closing__orb .brand__mark { width: 94px; }
@@ -232,7 +232,7 @@ footer div { display: flex; gap: 13px; color: var(--gold-500); }
 .loader__court span { position:absolute; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(212,175,55,.22),transparent); }
 .loader__court span:nth-child(1){top:10%}.loader__court span:nth-child(2){top:28%}.loader__court span:nth-child(3){top:50%}.loader__court span:nth-child(4){top:72%}.loader__court span:nth-child(5){top:90%}
 .loader__roof { position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; transform-style:preserve-3d; pointer-events:none; }
-.loader__panel { position:relative; overflow:hidden; background-image:url('/aurelis-roof-loader.png'); background-repeat:no-repeat; background-size:200% 100%; border-bottom:1px solid rgba(212,175,55,.32); box-shadow:0 25px 80px rgba(0,0,0,.72); }
+.loader__panel { position:relative; overflow:hidden; background-image:url('/aurelis-roof-loader.webp'); background-repeat:no-repeat; background-size:200% 100%; border-bottom:1px solid rgba(212,175,55,.32); box-shadow:0 25px 80px rgba(0,0,0,.72); }
 .loader__panel--left { background-position:left center; }
 .loader__panel--right { background-position:right center; }
 .loader__panel::before { content:''; position:absolute; inset:0; background:linear-gradient(180deg,rgba(3,7,12,.04),rgba(3,7,12,.14)); }
@@ -508,7 +508,7 @@ main { position:relative; z-index:2; }
   background:
     linear-gradient(90deg,rgba(5,7,11,.18) 0%,rgba(5,7,11,.24) 26%,rgba(5,7,11,.46) 42%,rgba(5,7,11,.76) 58%,rgba(7,8,13,.94) 74%,#07080d 100%),
     linear-gradient(180deg,rgba(7,8,13,.08),rgba(7,8,13,.3)),
-    url('/aurelis-closing-ball.png') 30% center / cover no-repeat;
+    url('/aurelis-closing-ball.webp') 30% center / cover no-repeat;
 }
 .closing__art { display:none; }
 .closing::after { content:none; }
@@ -517,7 +517,7 @@ main { position:relative; z-index:2; }
   .closing {
     background:
       linear-gradient(180deg,rgba(5,7,11,.14) 0%,rgba(5,7,11,.38) 34%,rgba(7,8,13,.91) 64%,#07080d 100%),
-      url('/aurelis-closing-ball.png') 27% center / cover no-repeat;
+      url('/aurelis-closing-ball.webp') 27% center / cover no-repeat;
   }
 }
 
@@ -737,6 +737,13 @@ footer {
 
 footer a { color:inherit; }
 footer div { font-size:13px; }
+
+@media (max-width:900px), (pointer:coarse) {
+  .ambient-particles span:nth-child(n+9) { display:none; }
+  .side-nav,.hero__book { backdrop-filter:none; }
+  .hero__image,.story__club,.story__court,.closing__art { will-change:auto; }
+  .community__cards article,.community__cards .reference-slice,.gallery__item,.gallery__item img { will-change:auto; }
+}
 
 @media (max-width:720px) {
   .closing__location span {

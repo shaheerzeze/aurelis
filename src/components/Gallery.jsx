@@ -2,11 +2,11 @@ import React from 'react';
 import { ActionLink } from './ActionLink.jsx';
 
 const galleryItems = [
-  { src: `${import.meta.env.BASE_URL}aurelis-hero-branded.png`, label: 'The clubhouse', meta: 'Architecture · Exterior', className: 'gallery__item--hero' },
-  { src: `${import.meta.env.BASE_URL}aurelis-lounge.png`, label: 'After the match', meta: 'Clubhouse · Lounge', className: 'gallery__item--lounge' },
-  { src: `${import.meta.env.BASE_URL}aurelis-court-branded.png`, label: 'Centre court', meta: 'Courts · Night play', className: 'gallery__item--court' },
-  { src: `${import.meta.env.BASE_URL}aurelis-community.png`, label: 'Together at Aurelis', meta: 'Community · Evenings', className: 'gallery__item--community' },
-  { src: `${import.meta.env.BASE_URL}aurelis-closing-ball.png`, label: 'Made for the game', meta: 'Aurelis · Details', className: 'gallery__item--detail' },
+  { src: `${import.meta.env.BASE_URL}aurelis-hero-branded.webp`, label: 'The clubhouse', meta: 'Architecture · Exterior', className: 'gallery__item--hero' },
+  { src: `${import.meta.env.BASE_URL}aurelis-lounge.webp`, label: 'After the match', meta: 'Clubhouse · Lounge', className: 'gallery__item--lounge' },
+  { src: `${import.meta.env.BASE_URL}aurelis-court-branded.webp`, label: 'Centre court', meta: 'Courts · Night play', className: 'gallery__item--court' },
+  { src: `${import.meta.env.BASE_URL}aurelis-community.webp`, label: 'Together at Aurelis', meta: 'Community · Evenings', className: 'gallery__item--community' },
+  { src: `${import.meta.env.BASE_URL}aurelis-closing-ball.webp`, label: 'Made for the game', meta: 'Aurelis · Details', className: 'gallery__item--detail' },
 ];
 
 export function Gallery() {

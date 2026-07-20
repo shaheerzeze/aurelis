@@ -1,0 +1,24 @@
+@font-face {
+  font-family: remixicon;
+  src: url('/remixicon.woff2') format('woff2');
+  font-display: swap;
+}
+
+[class^='ri-'], [class*=' ri-'] {
+  font-family: remixicon !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ri-arrow-down-s-line::before { content:'\ea4e'; }
+.ri-arrow-right-line::before { content:'\ea6c'; }
+.ri-arrow-right-up-line::before { content:'\ea70'; }
+.ri-calendar-check-line::before { content:'\eb23'; }
+.ri-instagram-line::before { content:'\ee66'; }
+.ri-linkedin-line::before { content:'\eeb6'; }
+.ri-lock-2-line::before { content:'\eecc'; }
+.ri-ping-pong-line::before { content:'\effe'; }
+.ri-shield-check-line::before { content:'\f100'; }
+.ri-youtube-line::before { content:'\f2d5'; }
+

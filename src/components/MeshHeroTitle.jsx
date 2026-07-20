@@ -40,7 +40,11 @@ export function MeshHeroTitle({ reduceMotion = false }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (reduceMotion || window.matchMedia('(pointer: coarse)').matches) return undefined;
+    const lowPowerDevice = window.innerWidth < 1100
+      || window.matchMedia('(pointer: coarse)').matches
+      || (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4)
+      || (navigator.deviceMemory && navigator.deviceMemory < 4);
+    if (reduceMotion || lowPowerDevice || document.hidden) return undefined;
     const wrapper = wrapperRef.current;
     const canvas = canvasRef.current;
     const gl = canvas?.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: true });

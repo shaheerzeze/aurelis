@@ -15,7 +15,7 @@ export function ClosingCta() {
             <div className="closing__actions"><ActionLink solid>Book a court</ActionLink><ActionLink>Become a member</ActionLink></div>
           </div>
           <a className="closing__location" href={mapUrl} target="_blank" rel="noreferrer" aria-label="Open Aurelis Padel Club location in Google Maps">
-            <img src={`${import.meta.env.BASE_URL}aurelis-location-map.png`} alt="Map showing Aurelis Padel Club near Piscine Den Nordpool and Colmar Park" />
+            <img src={`${import.meta.env.BASE_URL}aurelis-location-map.webp`} alt="Map showing Aurelis Padel Club near Piscine Den Nordpool and Colmar Park" loading="lazy" decoding="async" />
             <span><small>Find the club</small><strong>Colmar Park</strong><em>Piscine - Den Nordpool</em></span>
             <i className="ri-arrow-right-up-line" />
           </a>
