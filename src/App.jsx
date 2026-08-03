@@ -275,7 +275,7 @@ function CourtCard({ court, index, icon, meta }) {
 
   const metaIcons = [asset('icons/players.svg'), asset('icons/levels.svg'), asset('icons/duration.svg')]
   return <motion.article className="court-card" initial={reduceMotion ? false : { opacity: 0, y: 90, scale: .96 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: .22 }} transition={{ type: 'spring', stiffness: 92, damping: 18, delay: reduceMotion ? 0 : index * .14 }} whileHover={reduceMotion ? undefined : { scale: 1.025 }} style={reduceMotion ? undefined : { rotateX, rotateY }} onMouseMove={followPointer} onMouseLeave={resetTilt}>
-    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small><img src={icon} alt="" /></div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} /></div>
+    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small><img src={icon} alt="" decoding="async" /></div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} loading="lazy" decoding="async" /></div>
     <div className="court-card__body"><div className="court-card__meta">{meta.reduce((items, item, metaIndex) => { if (metaIndex % 2 === 0) items.push(<span key={item}><img src={metaIcons[metaIndex / 2]} alt="" /><b>{item}</b><small>{meta[metaIndex + 1]}</small></span>); return items }, [])}</div><p className="court-card__price"><strong>{court.price}</strong><small>/ hour</small></p><a className="court-card__book" href="#contact"><span>Book now</span><img src={asset('icons/arrow-right.svg')} alt="" /></a></div>
   </motion.article>
 }
@@ -352,7 +352,7 @@ function ExperienceEditorial() {
         {galleryImages.map((image, imageIndex) => {
           const expanded = displayedImage === imageIndex
           return <article key={image.src} className={`club-accordion__item${expanded ? ' is-expanded' : ''}`} tabIndex="0" onMouseEnter={() => setHoveredImage(imageIndex)} onFocus={() => setHoveredImage(imageIndex)} onBlur={() => setHoveredImage(null)} onClick={() => setActiveImage(imageIndex)}>
-            <img src={asset(image.src)} alt={image.alt} /><div className="club-accordion__shade" aria-hidden="true" />
+            <img src={asset(image.src)} alt={image.alt} loading="lazy" decoding="async" /><div className="club-accordion__shade" aria-hidden="true" />
             <div className="club-accordion__copy"><small>{expanded ? 'Featured' : String(imageIndex + 1).padStart(2, '0')}</small><span>{image.kicker}</span><h3>{image.title}</h3>{expanded ? <p>{image.copy}</p> : <b aria-hidden="true">+</b>}</div>
           </article>
         })}
@@ -370,7 +370,7 @@ function ExperienceEditorial() {
         const { offset, position } = legacyGalleryPosition(imageIndex)
         const isCenter = position === 'center'
         const isWrapping = (galleryDirection === 1 && offset === 3) || (galleryDirection === -1 && offset === 4)
-        return <motion.figure layout key={image.src} className={`experience__gallery-item is-${position}`} initial={false} animate={{ opacity: isWrapping && !reduceMotion ? [0, 0, .82] : isCenter ? 1 : .82 }} transition={{ layout: { duration: reduceMotion ? 0 : .72, ease: [.22, 1, .36, 1] }, opacity: { duration: reduceMotion ? 0 : .72, times: isWrapping ? [0, .72, 1] : undefined } }} onClick={() => showImageAtOffset(offset <= 3 ? offset : offset - galleryImages.length, imageIndex)}><img src={asset(image.src)} alt={image.alt} /><figcaption><small>{image.kicker}</small><strong>{image.title}</strong>{isCenter ? <span>{image.copy}</span> : null}</figcaption>{isCenter ? <div className="experience__counter"><b>{String(activeImage + 1).padStart(2, '0')}</b><i>/</i><span>{String(galleryImages.length).padStart(2, '0')}</span></div> : null}</motion.figure>
+        return <motion.figure layout key={image.src} className={`experience__gallery-item is-${position}`} initial={false} animate={{ opacity: isWrapping && !reduceMotion ? [0, 0, .82] : isCenter ? 1 : .82 }} transition={{ layout: { duration: reduceMotion ? 0 : .72, ease: [.22, 1, .36, 1] }, opacity: { duration: reduceMotion ? 0 : .72, times: isWrapping ? [0, .72, 1] : undefined } }} onClick={() => showImageAtOffset(offset <= 3 ? offset : offset - galleryImages.length, imageIndex)}><img src={asset(image.src)} alt={image.alt} loading="lazy" decoding="async" /><figcaption><small>{image.kicker}</small><strong>{image.title}</strong>{isCenter ? <span>{image.copy}</span> : null}</figcaption>{isCenter ? <div className="experience__counter"><b>{String(activeImage + 1).padStart(2, '0')}</b><i>/</i><span>{String(galleryImages.length).padStart(2, '0')}</span></div> : null}</motion.figure>
       })}
     </div><button className="experience__side-control experience__side-control--next" type="button" onClick={showNext} aria-label="Show next gallery image">→</button></div>
     <a className="button button--secondary experience__gallery-button" href="#contact"><span>Discover the club</span><Arrow /></a>
@@ -392,7 +392,7 @@ function Academy() {
       <Button href="#contact">Discover academy</Button>
     </motion.div>
     <div className="academy-grid academy-grid--showcase">{academy.map((item, index) => <motion.article className="academy-card" key={item.name} onMouseMove={followAcademyGlow} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: index * .12, ease: [.22, 1, .36, 1] }}>
-      <div className="academy-card__media"><b>0{index + 1}</b><i /><img src={asset('aurelis-academy.png')} style={{ objectPosition: item.pos }} alt={item.name} /></div>
+      <div className="academy-card__media"><b>0{index + 1}</b><i /><img src={asset('aurelis-academy.webp')} style={{ objectPosition: item.pos }} alt={item.name} loading="lazy" decoding="async" /></div>
       <div className="academy-card__body"><i className={programIcons[index]} /><h3>{item.name}</h3><span /><p>{item.copy}</p><a href="#contact">Learn more <Arrow /></a></div>
     </motion.article>)}
       <motion.article className="academy-membership" onMouseMove={followAcademyGlow} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: .36, ease: [.22, 1, .36, 1] }}>
@@ -515,7 +515,7 @@ function Footer() {
 
 function SponsorMarquee() {
   const sponsors = Array.from({ length: 8 })
-  return <section className="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo.svg')} alt={group === 0 && index === 0 ? 'Aurelis' : ''} /></div>)}</div>)}</div></div></section>
+  return <section className="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo.svg')} alt={group === 0 && index === 0 ? 'Aurelis' : ''} loading="lazy" decoding="async" /></div>)}</div>)}</div></div></section>
 }
 
 function FloatingActions() {
@@ -592,8 +592,8 @@ function CourtRoofIntro() {
   }, { scope: root, dependencies: [ready, visible, reduceMotion], revertOnUpdate: true })
 
   if (!visible) return null
-  return <div className="roof-intro" ref={root} style={{ '--roof-image': `url(${asset('aurelis-roof-intro.png')})` }} aria-label="Opening Aurelis court" aria-live="polite">
-    <img className="roof-intro__preload" src={asset('aurelis-roof-intro.png')} alt="" onLoad={() => setReady(true)} />
+  return <div className="roof-intro" ref={root} style={{ '--roof-image': `url(${asset('aurelis-roof-intro.webp')})` }} aria-label="Opening Aurelis court" aria-live="polite">
+    <img className="roof-intro__preload" src={asset('aurelis-roof-intro.webp')} alt="" fetchPriority="high" onLoad={() => setReady(true)} />
     <div className="roof-intro__veil" />
     <div className="roof-intro__panel roof-intro__panel--left" />
     <div className="roof-intro__panel roof-intro__panel--right" />

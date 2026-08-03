@@ -963,3 +963,11 @@ footer .footer__brand,footer .footer__column{display:flex;flex-direction:column;
 .roof-intro__skip:hover{color:#8ee4d2;border-color:#8ee4d2}
 @media(max-width:700px){.roof-intro__panel{background-size:auto 100%}.roof-intro__panel--left{background-position:44% center}.roof-intro__panel--right{background-position:56% center}}
 @media(prefers-reduced-motion:reduce){.roof-intro__panel,.roof-intro__glow,.roof-intro__veil{will-change:auto}}
+
+/* Keep initial rendering focused on the hero; lower sections paint as they approach the viewport. */
+@supports(content-visibility:auto){
+  #courts,#experience,#academy,#events,#faq,.sponsors,#contact{
+    content-visibility:auto;
+    contain-intrinsic-size:auto 760px;
+  }
+}
