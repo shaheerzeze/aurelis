@@ -1,6 +1,6 @@
 @font-face {
   font-family: remixicon;
-  src: url('/remixicon.woff2') format('woff2');
+  src: url('../remixicon.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -21,4 +21,7 @@
 .ri-ping-pong-line::before { content:'\effe'; }
 .ri-shield-check-line::before { content:'\f100'; }
 .ri-youtube-line::before { content:'\f2d5'; }
-
+.ri-layout-grid-line::before { content:'\effe'; }
+.ri-graduation-cap-line::before { content:'\effe'; }
+.ri-facebook-fill::before { content:'\ee66'; }
+.ri-youtube-fill::before { content:'\f2d5'; }
