@@ -18,8 +18,8 @@ const HERO_VIDEOS = [
 
 const courts = [
   { name: 'Padel court', price: '24€', image: asset('court-padel.jpg') },
-  { name: 'Tennis court', price: '26€', image: asset('court-tennis.jpg') },
-  { name: 'Double court', price: '36€', image: asset('court-double.jpg') },
+  { name: 'Single padel court', price: '26€', image: asset('court-tennis.jpg') },
+  { name: 'Tennis court', price: '36€', image: asset('court-double.jpg') },
 ]
 
 const academy = [
@@ -45,12 +45,52 @@ const faqs = [
 
 const Arrow = () => <i className="ri-arrow-right-line ui-icon" aria-hidden="true" />
 
-function SocialIcon({ name }) {
-  const common = { viewBox: '0 0 24 24', 'aria-hidden': true, focusable: 'false' }
-  if (name === 'instagram') return <svg {...common} fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-  if (name === 'facebook') return <svg {...common} fill="currentColor"><path d="M13.7 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.25-1.5 1.57-1.5H17V3.62a23 23 0 0 0-2.43-.12c-2.4 0-4.04 1.46-4.04 4.14V10H7.8v3.1h2.73V21h3.17Z"/></svg>
-  if (name === 'youtube') return <svg {...common} fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="2.75" y="5.25" width="18.5" height="13.5" rx="4"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor" stroke="none"/></svg>
-  return <svg {...common} fill="currentColor"><path d="M5.3 8.1H2.2V21h3.1V8.1ZM3.75 3A1.8 1.8 0 1 0 3.75 6.6 1.8 1.8 0 0 0 3.75 3ZM21.8 13.6c0-3.88-2.07-5.68-4.83-5.68-2.23 0-3.22 1.22-3.77 2.08V8.1h-3.1V21h3.1v-6.4c0-1.68.32-3.3 2.4-3.3 2.05 0 2.08 1.92 2.08 3.4V21h3.12l1-7.4Z"/></svg>
+function PadelIcon({ className = '' }) {
+  return (
+    <svg className={`padel-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+      {/* Outer Frame of Padel Racket */}
+      <path
+        d="M12 2C7.58 2 4 5.58 4 10c0 3.2 1.9 5.9 4.6 7.1L7.5 21a1 1 0 0 0 .9 1.4h7.2a1 1 0 0 0 .9-1.4l-1.1-3.9C18.1 15.9 20 13.2 20 10c0-4.42-3.58-8-8-8z"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* Triangular Bridge / Throat */}
+      <path d="M9.2 14.5L12 12l2.8 2.5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Signature Padel Perforation Holes (Solid Filled Dots) */}
+      <circle cx="12" cy="5.8" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="9.2" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="14.8" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="9.2" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="12" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
+      <circle cx="14.8" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+function CoachIcon({ className = '' }) {
+  return (
+    <svg className={`ui-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2C14.2091 2 16 3.79086 16 6C16 8.20914 14.2091 10 12 10C9.79086 10 8 8.20914 8 6C8 3.79086 9.79086 2 12 2ZM12 11C14.7614 11 17 13.2386 17 16V22H7V16C7 13.2386 9.23858 11 12 11ZM17.8 9.2L19.2 10.6L22.5 7.3L21.1 5.9L17.8 9.2Z" />
+    </svg>
+  )
+}
+
+function EventsIcon({ className = '' }) {
+  return (
+    <svg className={`ui-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20ZM10.56 17.46L7.4 14.3L8.81 12.89L10.56 14.64L15.15 10.05L16.56 11.46L10.56 17.46Z" />
+    </svg>
+  )
+}
+
+function GroupIcon({ className = '' }) {
+  return (
+    <svg className={`ui-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 11C14.7614 11 17 13.2386 17 16V22H15V16C15 14.4023 13.7511 13.0963 12.1763 13.0051L12 13C10.4023 13 9.09634 14.2489 9.00509 15.8237L9 16V22H7V16C7 13.2386 9.23858 11 12 11ZM5.5 14C5.77885 14 6.05009 14.0326 6.3101 14.0942C6.14202 14.594 6.03873 15.122 6.00896 15.6693L6 16L6.0007 16.0856C5.88757 16.0456 5.76821 16.0187 5.64446 16.0069L5.5 16C4.7203 16 4.07955 16.5949 4.00687 17.3555L4 17.5V22H2V17.5C2 15.567 3.567 14 5.5 14ZM18.5 14C20.433 14 22 15.567 22 17.5V22H20V17.5C20 16.7203 19.4051 16.0796 18.6445 16.0069L18.5 16C18.3248 16 18.1566 16.03 18.0003 16.0852L18 16C18 15.3343 17.8916 14.694 17.6915 14.0956C17.9499 14.0326 18.2211 14 18.5 14ZM5.5 8C6.88071 8 8 9.11929 8 10.5C8 11.8807 6.88071 13 5.5 13C4.11929 13 3 11.8807 3 10.5C3 9.11929 4.11929 8 5.5 8ZM18.5 8C19.8807 8 21 9.11929 21 10.5C21 11.8807 19.8807 13 18.5 13C17.1193 13 16 11.8807 16 10.5C16 9.11929 17.1193 8 18.5 8ZM5.5 10C5.22386 10 5 10.2239 5 10.5C5 10.7761 5.22386 11 5.5 11C5.77614 11 6 10.7761 6 10.5C6 10.2239 5.77614 10 5.5 10ZM18.5 10C18.2239 10 18 10.2239 18 10.5C18 10.7761 18.2239 11 18.5 11C18.7761 11 19 10.7761 19 10.5C19 10.2239 18.7761 10 18.5 10ZM12 2C14.2091 2 16 3.79086 16 6C16 8.20914 14.2091 10 12 10C9.79086 10 8 8.20914 8 6C8 3.79086 9.79086 2 12 2ZM12 4C10.8954 4 10 4.89543 10 6C10 7.10457 10.8954 8 12 8C13.1046 8 14 7.10457 14 6C14 4.89543 13.1046 4 12 4Z" />
+    </svg>
+  )
 }
 
 function Brand() {
@@ -90,8 +130,9 @@ function Header() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const links = [['Courts', '#courts'], ['Academy', '#academy'], ['Club', '#experience'], ['Events', '#events'], ['Contact', '#contact'], ['Wanna be a sponsor', '#sponsors']]
   return <header className={`header ${hidden ? 'header--hidden' : ''} ${scrolled ? 'header--scrolled' : ''}`}><Brand /><nav className="nav">
-    {['Courts', 'Academy', 'Experience', 'Events', 'About', 'Contact'].map(item => <a key={item} href={`#${item.toLowerCase()}`}>{item}</a>)}
+    {links.map(([label, href]) => <a key={label} href={href}><span>{label}</span></a>)}
   </nav><a className="header-book" href="#courts">Book a court</a></header>
 }
 
@@ -152,7 +193,7 @@ function HeroTargetCursor() {
     }
 
     const move = event => {
-      const snapTarget = event.target.closest('.hero__actions .button, .hero__previews button, .nav a, .header-book, .brand')
+      const snapTarget = event.target.closest('.hero__actions .button, .hero__previews button, .nav a span, .header-book, .brand')
       if (snapTarget) {
         const rect = snapTarget.getBoundingClientRect()
         activeTarget = snapTarget
@@ -224,7 +265,7 @@ function Hero() {
       resumeTimeRef.current = incomingVideoRef.current?.currentTime || 0
       setActiveVideo(incomingVideo)
       setIncomingVideo(null)
-    }, 2250)
+    }, 600)
     return () => window.clearTimeout(timer)
   }, [incomingVideo])
 
@@ -235,10 +276,10 @@ function Hero() {
   }
 
   const benefits = [
-    ['ri-layout-grid-line', 'Premium courts', 'Indoor & outdoor courts'],
-    ['ri-lock-2-line', 'Expert coaches', 'Certified for every level'],
-    ['ri-calendar-check-line', 'Events & tournaments', 'Competitive play all year'],
-    ['ri-ping-pong-line', 'Vibrant community', 'Play, connect and belong'],
+    [<PadelIcon key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<CoachIcon key="coach" />, 'Expert coaches', 'Certified for every level'],
+    [<EventsIcon key="events" />, 'Events & tournaments', 'Competitive play all year'],
+    [<GroupIcon key="group" />, 'Vibrant community', 'Play, connect and belong'],
   ]
   return <section className="hero hero--campaign hero--restored" id="home"><Header /><HeroTargetCursor /><video key={activeVideo} className="hero__image hero__video" autoPlay muted loop playsInline preload="metadata" onLoadedMetadata={resumeIncomingPlayback} poster={asset('aurelis-hero-poster.jpg')} aria-label={HERO_VIDEOS[activeVideo].label}><source media="(max-width: 700px)" src={HERO_VIDEOS[activeVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[activeVideo].src} type="video/mp4" /></video>
     {incomingVideo !== null && <video ref={incomingVideoRef} key={`incoming-${incomingVideo}`} className="hero__image hero__video hero__video--incoming" autoPlay muted loop playsInline preload="auto" poster={asset('aurelis-hero-poster.jpg')} aria-hidden="true"><source media="(max-width: 700px)" src={HERO_VIDEOS[incomingVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[incomingVideo].src} type="video/mp4" /></video>}
@@ -249,12 +290,12 @@ function Hero() {
       <div className="hero__actions"><Button>Book a court</Button><Button secondary href="#experience">Explore the club</Button></div>
     </motion.div>
     <div className="hero__previews">
-      <span className="hero__index"><b>0{activeVideo + 1}</b><i /></span>
-      <div>{HERO_VIDEOS.map((video, index) => <button type="button" className={(incomingVideo ?? activeVideo) === index ? 'is-active' : ''} onClick={() => startVideoTransition(index)} key={video.label} aria-label={`Play ${video.label}`} aria-pressed={(incomingVideo ?? activeVideo) === index}><video autoPlay muted loop playsInline preload="metadata"><source src={video.mobile} type="video/mp4" /></video><span /></button>)}</div>
+        <span className="hero__index"><b>0{activeVideo + 1}</b><span className="hero__track"><i className="hero__loading-line" key={`loading-${activeVideo}`} /></span></span>
+      <div>{HERO_VIDEOS.map((video, index) => <button type="button" className={activeVideo === index ? 'is-active' : ''} onClick={() => startVideoTransition(index)} key={video.label} aria-label={`Play ${video.label}`} aria-pressed={activeVideo === index}><video autoPlay muted loop playsInline preload="metadata"><source src={video.mobile} type="video/mp4" /></video><span key={`thumb-line-${activeVideo}`} /></button>)}</div>
       <p><strong>World-class facilities</strong><span>Indoor & outdoor courts<br />Built for champions</span></p>
     </div>
     <a className="hero__scroll-cue" href="#courts"><span>Scroll down</span><i><b /></i></a>
-    <div className="hero__benefits">{benefits.map(([icon,title,copy]) => <div key={title}><i className={icon} /><p><strong>{title}</strong><small>{copy}</small></p></div>)}</div>
+    <div className="hero__benefits">{benefits.map(([icon, title, copy]) => <div key={title}>{icon}<p><strong>{title}</strong><small>{copy}</small></p></div>)}</div>
   </section>
 }
 
@@ -275,19 +316,19 @@ function CourtCard({ court, index, icon, meta }) {
 
   const metaIcons = [asset('icons/players.svg'), asset('icons/levels.svg'), asset('icons/duration.svg')]
   return <motion.article className="court-card" initial={reduceMotion ? false : { opacity: 0, y: 90, scale: .96 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: .22 }} transition={{ type: 'spring', stiffness: 92, damping: 18, delay: reduceMotion ? 0 : index * .14 }} whileHover={reduceMotion ? undefined : { scale: 1.025 }} style={reduceMotion ? undefined : { rotateX, rotateY }} onMouseMove={followPointer} onMouseLeave={resetTilt}>
-    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small><img src={icon} alt="" decoding="async" /></div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} loading="lazy" decoding="async" /></div>
+    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small>{icon === 'padel' ? <PadelIcon /> : <img src={icon} alt="" decoding="async" />}</div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} loading="lazy" decoding="async" /></div>
     <div className="court-card__body"><div className="court-card__meta">{meta.reduce((items, item, metaIndex) => { if (metaIndex % 2 === 0) items.push(<span key={item}><img src={metaIcons[metaIndex / 2]} alt="" /><b>{item}</b><small>{meta[metaIndex + 1]}</small></span>); return items }, [])}</div><p className="court-card__price"><strong>{court.price}</strong><small>/ hour</small></p><a className="court-card__book" href="#contact"><span>Book now</span><img src={asset('icons/arrow-right.svg')} alt="" /></a></div>
   </motion.article>
 }
 
 function Courts() {
-  const icons = [asset('icons/court-racket.svg'), asset('icons/court-ball.svg'), asset('icons/court-team.svg')]
+  const icons = ['padel', 'padel', asset('icons/court-ball.svg')]
   const courtMeta = [
-    ['2–4', 'Players', 'All', 'Levels', '60', 'Minutes'],
-    ['2–4', 'Players', 'All', 'Levels', '60', 'Minutes'],
     ['4', 'Players', 'All', 'Levels', '60', 'Minutes'],
+    ['2', 'Players', 'All', 'Levels', '60', 'Minutes'],
+    ['2–4', 'Players', 'All', 'Levels', '60', 'Minutes'],
   ]
-  return <section className="section courts courts--light" id="courts"><div className="section-lead"><div className="courts__eyebrow"><small>Our courts</small><i /><span /></div><h2>Choose<br />your <em>game</em></h2><p>Top-quality courts, designed for champions. Book your court in just a few clicks.</p><Button href="#courts">View all courts</Button></div>
+  return <section className="section courts courts--light" id="courts"><div className="section-lead"><div className="courts__eyebrow"><small>Our courts</small><i aria-hidden="true" /></div><h2>Choose<br />your <em>game</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><p>Top-quality courts, designed for champions. Book your court in just a few clicks.</p><Button href="#courts">View all courts</Button></div>
     <div className="court-grid">{courts.map((court, index) => <CourtCard key={court.name} court={court} index={index} icon={icons[index]} meta={courtMeta[index]} />)}</div>
   </section>
 }
@@ -338,13 +379,13 @@ function ExperienceEditorial() {
     <div className="experience__page-grid" aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</div>
     <div className="club-overview__lead">
       <div className="club-overview__eyebrow"><small>Our club</small><i aria-hidden="true" /></div>
-      <h2>Aurelis<br />club</h2><span className="club-overview__rule" aria-hidden="true" />
+      <h2>Aurelis<br /><em>club</em></h2><span className="club-overview__rule" aria-hidden="true" />
       <p>Premium courts, designed for performance.</p>
       <div className="club-overview__features">
         <article><img src={asset('icons/court-racket.svg')} alt="" /><div><strong>Premium facilities</strong><span>State-of-the-art courts and amenities for the best experience.</span></div></article>
         <article><img src={asset('icons/players.svg')} alt="" /><div><strong>Expert coaching</strong><span>Programs for every level. Train with the best.</span></div></article>
       </div>
-      <a className="club-overview__cta" href="#contact"><span>Discover the club</span><Arrow /></a>
+      <a className="club-overview__cta" href="#contact"><span>Register</span><Arrow /></a>
     </div>
     <div className="club-overview__showcase">
       <div className="club-overview__counter">[ <b>{String(displayedImage + 1).padStart(2, '0')}</b><i>/</i>{String(galleryImages.length).padStart(2, '0')} ]</div>
@@ -386,16 +427,18 @@ function Academy() {
   }
   return <section className="academy academy--showcase" id="academy">
     <motion.div className="academy__intro" initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .75 }}>
-      <div className="academy__eyebrow"><small>Aurelis academy</small><i /></div>
+      <div className="academy__eyebrow"><small>Aurelis academy</small><i aria-hidden="true" /></div>
       <h2>Train.<br />Improve.<br /><em>Achieve.</em></h2>
+      <span className="section-heading__bottom-rule" aria-hidden="true" />
       <p>Programs and coaching designed to elevate your game to the next level.</p>
       <Button href="#contact">Discover academy</Button>
     </motion.div>
     <div className="academy-grid academy-grid--showcase">{academy.map((item, index) => <motion.article className="academy-card" key={item.name} onMouseMove={followAcademyGlow} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: index * .12, ease: [.22, 1, .36, 1] }}>
       <div className="academy-card__media"><b>0{index + 1}</b><i /><img src={asset('aurelis-academy.webp')} style={{ objectPosition: item.pos }} alt={item.name} loading="lazy" decoding="async" /></div>
       <div className="academy-card__body"><i className={programIcons[index]} /><h3>{item.name}</h3><span /><p>{item.copy}</p><a href="#contact">Learn more <Arrow /></a></div>
+      <span className="academy-card__cursor">Learn more<Arrow /></span>
     </motion.article>)}
-      <motion.article className="academy-membership" onMouseMove={followAcademyGlow} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: .36, ease: [.22, 1, .36, 1] }}>
+      <motion.article className="academy-membership" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: .36, ease: [.22, 1, .36, 1] }}>
         <div className="academy-membership__mark"><img src={asset('aurelis-mark.svg')} alt="Aurelis" /></div><h3>Academy<br />membership</h3><span />
         <ul><li><img src={asset('icons/duration.svg')} alt="" />More sessions.</li><li><img src={asset('icons/levels.svg')} alt="" />More benefits.</li><li><img src={asset('icons/players.svg')} alt="" />One community.</li></ul>
         <a href="#contact">Learn more <Arrow /></a>
@@ -411,7 +454,7 @@ function Events() {
     event.currentTarget.style.setProperty('--event-x', `${event.clientX - bounds.left}px`)
     event.currentTarget.style.setProperty('--event-y', `${event.clientY - bounds.top}px`)
   }
-  return <section className="events" id="events"><div className="events__title"><small>Upcoming events</small><h2>Club<br />calendar</h2><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]} onPointerMove={followEventCursor}><a className="event-card__link" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`} aria-label={`Open ${e[3]}`} /><span className="event-card__cursor">Open</span><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><p>Discover the club together <Arrow /></p></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
+  return <section className="events" id="events"><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]} onPointerMove={followEventCursor}><a className="event-card__link" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`} aria-label={`Open ${e[3]}`} /><span className="event-card__cursor">Register</span><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><p>Register <Arrow /></p></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
 }
 
 const technologyFeatures = [
@@ -493,7 +536,7 @@ function Technology() {
           <section className="phone-access"><small>Club access</small><strong>Unlocked</strong><p>Welcome back.<br />Enjoy your game.</p><i className="ri-lock-unlock-line" /></section>
           <section className="phone-match"><div><small>Next match</small><strong>Today · 20:00</strong><span><i className="ri-map-pin-line" /> Court 2</span><span><i className="ri-time-line" /> 90 min</span><div className="phone-avatars"><b>A</b><b>M</b><b>J</b><b>+1</b></div></div><img src={asset('court-padel.jpg')} alt="Aurelis court" /></section>
           <div className="phone-actions"><button><i className="ri-calendar-check-line" />Book a court <Arrow /></button><button><i className="ri-ping-pong-line" />Rent equipment <Arrow /></button></div>
-          <section className="phone-availability"><small>Court availability</small><div className="phone-times"><span>18:00</span><span>19:00</span><span>20:00</span><span>21:00</span><span>22:00</span></div>{[1,2,3].map(row => <div className="phone-slots" key={row}><b>Court {row}</b>{[0,1,2,3,4].map(slot => <i className={slot === 2 && row === 2 ? 'is-booked' : slot % 3 === 0 ? 'is-open' : ''} key={slot} />)}</div>)}</section>
+          <section className="phone-availability"><small>Court availability</small><div className="phone-times"><span>18:00</span><span>19:00</span><span>20:00</span><span>21:00</span><span>22:00</span></div>{[1, 2, 3].map(row => <div className="phone-slots" key={row}><b>Court {row}</b>{[0, 1, 2, 3, 4].map(slot => <i className={slot === 2 && row === 2 ? 'is-booked' : slot % 3 === 0 ? 'is-open' : ''} key={slot} />)}</div>)}</section>
           <nav className="phone-nav"><b><i className="ri-home-4-line" />Home</b><span><i className="ri-calendar-line" />Book</span><span><i className="ri-team-line" />Community</span><span><i className="ri-user-line" />Profile</span></nav>
         </div>
       </div>
@@ -505,17 +548,19 @@ function Technology() {
 function FAQ() {
   const [active, setActive] = useState(null)
   const reduceMotion = useReducedMotion()
-  return <section className="faq" id="faq"><div className="faq__intro"><small>FAQ</small><h2>Frequently<br />asked <em>questions</em></h2><i aria-hidden="true" /><p>Everything you need to know about Aurelis Club.</p></div><div className="faq__list">{faqs.map(([q,a], i) => <article className={active === i ? 'is-open' : ''} key={q}><button onClick={() => setActive(active === i ? null : i)} aria-expanded={active === i}><span>{q}</span><b aria-hidden="true">{active === i ? '−' : '+'}</b></button>{active === i ? <motion.p initial={reduceMotion ? false : { opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .24 }}>{a}</motion.p> : null}</article>)}</div></section>
+  return <section className="faq" id="faq"><div className="faq__intro"><div className="faq__eyebrow"><small>FAQ</small><i aria-hidden="true" /></div><h2>Frequently<br />asked <em>questions</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><p>Everything you need to know about Aurelis Club.</p></div><div className="faq__list">{faqs.map(([q, a], i) => <article className={active === i ? 'is-open' : ''} key={q}><button onClick={() => setActive(active === i ? null : i)} aria-expanded={active === i}><span>{q}</span><b aria-hidden="true">{active === i ? '−' : '+'}</b></button>{active === i ? <motion.p initial={reduceMotion ? false : { opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .24 }}>{a}</motion.p> : null}</article>)}</div></section>
 }
 
 function Footer() {
-  const groups = [['Clubs','Courts','Prices','Opening hours'],['Academy','Programs','Coaches','Membership'],['Experience','Facilities','Lounge & café','Gallery'],['About','Our story','Team','Careers']]
-  return <footer id="contact"><div className="footer__main"><div className="footer__brand"><Brand /><span className="footer__brand-rule" aria-hidden="true" /><div className="footer__socials"><a href="#contact" aria-label="Instagram"><SocialIcon name="instagram" /></a><a href="#contact" aria-label="Facebook"><SocialIcon name="facebook" /></a><a href="#contact" aria-label="YouTube"><SocialIcon name="youtube" /></a><a href="#contact" aria-label="LinkedIn"><SocialIcon name="linkedin" /></a></div></div>{groups.map(group => <nav className="footer__column" aria-label={group[0]} key={group[0]}><b>{group[0]}</b>{group.slice(1).map(x => <a href="#home" key={x}>{x}</a>)}</nav>)}<address className="footer__column footer__contact"><b>Contact</b><span>123 Padel Avenue</span><span>68000 Colmar, France</span><a href="tel:+33612345678">+33 6 12 34 56 78</a><a href="mailto:hello@aurelisclub.com">hello@aurelisclub.com</a></address></div><div className="footer__bottom"><span>© 2026 Aurelis Padel Club.</span><span><a href="#contact">Privacy policy</a><i>·</i><a href="#contact">Terms &amp; conditions</a></span></div></footer>
+  const groups = [['Play', ['Courts', 'Academy', 'Events']], ['Discover', ['Club', 'FAQ', 'Become a sponsor']]]
+  const footerHref = { Club: '#experience', FAQ: '#faq', 'Become a sponsor': '#sponsors' }
+  const socials = ['Instagram', 'Facebook', 'YouTube', 'LinkedIn']
+  return <footer id="contact" className="footer--modern"><div className="footer__main"><div className="footer__brand"><Brand /><h2 className="footer__heading">Play.<br />Improve.<br /><em>Achieve.</em></h2><p>Premium padel and tennis,<br />built around the way you play.</p><Button href="#courts">Book a court</Button></div><div className="footer__links"><div className="footer__nav-row">{groups.map(([title, links]) => <nav className="footer__column" aria-label={title} key={title}><b>{title}</b><i className="footer__column-rule" aria-hidden="true" />{links.map(x => <a href={footerHref[x] ?? `#${x.toLowerCase()}`} key={x}>{x}</a>)}</nav>)}<address className="footer__column footer__contact"><b>Visit us</b><i className="footer__column-rule" aria-hidden="true" /><span>123 Padel Avenue</span><span>68000 Colmar, France</span><a href="tel:+33612345678">+33 6 12 34 56 78</a><a href="mailto:hello@aurelisclub.com">hello@aurelisclub.com</a></address></div><div className="footer__follow"><b>Follow us</b><i className="footer__column-rule" aria-hidden="true" /><div className="footer__socials">{socials.map(name => <a href="#contact" key={name}>{name}<i className="ri-arrow-right-up-line" aria-hidden="true" /></a>)}</div></div></div></div><div className="footer__bottom"><span>© 2026 Aurelis Padel Club.</span><span><a href="#contact">Privacy policy</a><i>·</i><a href="#contact">Terms &amp; conditions</a></span></div></footer>
 }
 
 function SponsorMarquee() {
   const sponsors = Array.from({ length: 8 })
-  return <section className="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo.svg')} alt={group === 0 && index === 0 ? 'Aurelis' : ''} loading="lazy" decoding="async" /></div>)}</div>)}</div></div></section>
+  return <section className="sponsors" id="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo.svg')} alt={group === 0 && index === 0 ? 'Aurelis' : ''} loading="lazy" decoding="async" /></div>)}</div>)}</div></div></section>
 }
 
 function FloatingActions() {
