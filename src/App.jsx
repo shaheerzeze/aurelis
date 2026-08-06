@@ -47,24 +47,8 @@ const Arrow = () => <i className="ri-arrow-right-line ui-icon" aria-hidden="true
 
 function PadelIcon({ className = '' }) {
   return (
-    <svg className={`padel-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-      {/* Outer Frame of Padel Racket */}
-      <path
-        d="M12 2C7.58 2 4 5.58 4 10c0 3.2 1.9 5.9 4.6 7.1L7.5 21a1 1 0 0 0 .9 1.4h7.2a1 1 0 0 0 .9-1.4l-1.1-3.9C18.1 15.9 20 13.2 20 10c0-4.42-3.58-8-8-8z"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Triangular Bridge / Throat */}
-      <path d="M9.2 14.5L12 12l2.8 2.5" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Signature Padel Perforation Holes (Solid Filled Dots) */}
-      <circle cx="12" cy="5.8" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="9.2" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="14.8" cy="8.2" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="9.2" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="12" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
-      <circle cx="14.8" cy="10.6" r="0.9" fill="currentColor" stroke="none" />
+    <svg className={`padel-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="m18.6 22l-5.825-5.8l-.7.7q-.575.575-1.312.875t-1.513.3t-1.525-.3T6.4 16.9l-4.225-4.25q-.575-.575-.875-1.312T1 9.825t.3-1.512T2.175 7L5 4.175Q5.575 3.6 6.313 3.3T7.825 3t1.513.3t1.312.875L14.9 8.4q.575.575.875 1.325t.3 1.525t-.3 1.513t-.875 1.312l-.7.7L20 20.6zm-9.35-5.925q.375 0 .738-.137t.662-.438l2.85-2.85q.3-.275.438-.65t.137-.75t-.137-.75t-.438-.675L9.25 5.6q-.275-.3-.65-.45T7.85 5t-.75.15t-.675.45L3.6 8.425q-.3.3-.437.663t-.138.737t.138.75t.437.675l4.25 4.25q.275.3.65.438t.75.137M5.175 11.1q.325 0 .538-.212t.212-.538t-.212-.537t-.538-.213t-.537.213t-.213.537t.213.538t.537.212m1.6-1.575q.325 0 .538-.212t.212-.538t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212m.175 3.35q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212m1.4-4.95q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212m.2 3.375q.325 0 .537-.213t.213-.537t-.213-.537T8.55 9.8t-.537.213t-.213.537t.213.538t.537.212m.15 3.35q.325 0 .538-.213t.212-.537t-.212-.537t-.538-.213t-.537.213t-.213.537t.213.538t.537.212m1.425-4.95q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212m.175 3.35q.325 0 .538-.213t.212-.537t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212m1.6-1.6q.325 0 .538-.212t.212-.538t-.213-.537t-.537-.213t-.537.213t-.213.537t.213.538t.537.212M19.5 9q-1.45 0-2.475-1.025T16 5.5t1.025-2.475T19.5 2t2.475 1.025T23 5.5t-1.025 2.475T19.5 9m0-2q.625 0 1.063-.437T21 5.5t-.437-1.062T19.5 4t-1.062.438T18 5.5t.438 1.063T19.5 7m0-1.5" />
     </svg>
   )
 }
@@ -275,6 +259,12 @@ function Hero() {
     resumeTimeRef.current = 0
   }
 
+  const playPreview = event => { event.currentTarget.querySelector('video')?.play().catch(() => {}) }
+  const pausePreview = event => {
+    const previewVideo = event.currentTarget.querySelector('video')
+    if (previewVideo) { previewVideo.pause(); previewVideo.currentTime = 0 }
+  }
+
   const benefits = [
     [<PadelIcon key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
     [<CoachIcon key="coach" />, 'Expert coaches', 'Certified for every level'],
@@ -291,7 +281,7 @@ function Hero() {
     </motion.div>
     <div className="hero__previews">
         <span className="hero__index"><b>0{activeVideo + 1}</b><span className="hero__track"><i className="hero__loading-line" key={`loading-${activeVideo}`} /></span></span>
-      <div>{HERO_VIDEOS.map((video, index) => <button type="button" className={activeVideo === index ? 'is-active' : ''} onClick={() => startVideoTransition(index)} key={video.label} aria-label={`Play ${video.label}`} aria-pressed={activeVideo === index}><video autoPlay muted loop playsInline preload="metadata"><source src={video.mobile} type="video/mp4" /></video><span key={`thumb-line-${activeVideo}`} /></button>)}</div>
+      <div>{HERO_VIDEOS.map((video, index) => <button type="button" className={activeVideo === index ? 'is-active' : ''} onClick={() => startVideoTransition(index)} onMouseEnter={playPreview} onMouseLeave={pausePreview} onFocus={playPreview} onBlur={pausePreview} key={video.label} aria-label={`Play ${video.label}`} aria-pressed={activeVideo === index}><video muted loop playsInline preload="metadata" poster={asset('aurelis-hero-poster.jpg')}><source src={video.mobile} type="video/mp4" /></video><span key={`thumb-line-${activeVideo}`} /></button>)}</div>
       <p><strong>World-class facilities</strong><span>Indoor & outdoor courts<br />Built for champions</span></p>
     </div>
     <a className="hero__scroll-cue" href="#courts"><span>Scroll down</span><i><b /></i></a>
