@@ -516,7 +516,7 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 .academy-grid.academy-grid--showcase .academy-membership{padding-top:42px}
 .academy-membership ul{position:relative;z-index:2}
 .academy-membership li{grid-template-columns:24px minmax(0,1fr);font-size:13px}
-.academy-membership li img{width:20px;height:20px;object-fit:contain;filter:brightness(0) saturate(100%) invert(67%) sepia(22%) saturate(1080%) hue-rotate(116deg) brightness(91%) contrast(87%)}
+.academy-membership li img{width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1)}
 .academy-membership>a{position:relative;z-index:6;background:transparent}
 
 /* Two-chapter sticky club story. */
