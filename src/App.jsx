@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -9,6 +9,15 @@ import './design-system.css'
 gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const asset = (name) => `${import.meta.env.BASE_URL}${name}`
+
+function SportBackdrop({ image, className = '', strength = 44, position = 'center' }) {
+  const root = useRef(null)
+  const reduceMotion = useReducedMotion()
+  const { scrollYProgress } = useScroll({ target: root, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [-strength, strength])
+
+  return <div ref={root} className={`sport-backdrop ${className}`} aria-hidden="true"><motion.div style={{ y: reduceMotion ? 0 : y, backgroundImage: `url("${image}")`, backgroundPosition: position }} /></div>
+}
 
 const HERO_VIDEOS = [
   { src: asset('hero-1-desktop.mp4'), mobile: asset('hero-1-mobile.mp4'), label: 'Signature court film' },
@@ -177,7 +186,7 @@ function HeroTargetCursor() {
     }
 
     const move = event => {
-      const snapTarget = event.target.closest('.hero__actions .button, .hero__previews button, .nav a span, .header-book, .brand')
+      const snapTarget = event.target.closest('.hero__actions .button, .hero__previews button, .hero-cinematic__films button, .hero-cinematic__reserve, .nav a span, .header-book, .brand')
       if (snapTarget) {
         const rect = snapTarget.getBoundingClientRect()
         activeTarget = snapTarget
@@ -226,7 +235,7 @@ function HeroTargetCursor() {
   return <div ref={cursorRef} className="hero-target-cursor" aria-hidden="true"><i /><i /><i /><i /><span /></div>
 }
 
-function Hero() {
+function HeroOriginal() {
   const [activeVideo, setActiveVideo] = useState(0)
   const [incomingVideo, setIncomingVideo] = useState(null)
   const incomingVideoRef = useRef(null)
@@ -289,6 +298,61 @@ function Hero() {
   </section>
 }
 
+function Hero() {
+  const [activeVideo, setActiveVideo] = useState(0)
+  const [transitionKey, setTransitionKey] = useState(0)
+  const features = [
+    [<PadelIcon key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<CoachIcon key="coach" />, 'Expert coaches', 'Certified for every level'],
+    [<EventsIcon key="events" />, 'Events & tournaments', 'Competitive play all year'],
+    [<GroupIcon key="group" />, 'Vibrant community', 'Play, connect and belong'],
+  ]
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveVideo(current => (current + 1) % HERO_VIDEOS.length)
+      setTransitionKey(current => current + 1)
+    }, 7000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const selectVideo = index => {
+    if (index === activeVideo) return
+    setActiveVideo(index)
+    setTransitionKey(current => current + 1)
+  }
+
+  return <><section className="hero hero--campaign hero--cinematic" id="home">
+    <Header />
+    <HeroTargetCursor />
+    <div className="hero-cinematic__media" aria-live="polite">
+      {HERO_VIDEOS.map((video, index) => <video key={video.label} className={activeVideo === index ? 'is-active' : ''} autoPlay muted loop playsInline preload={index === 0 ? 'auto' : 'metadata'} poster={asset('aurelis-hero-poster.jpg')} aria-hidden={activeVideo !== index}><source media="(max-width: 700px)" src={video.mobile} type="video/mp4" /><source src={video.src} type="video/mp4" /></video>)}
+      <div className="hero-cinematic__shade" />
+      <div className="hero-cinematic__grid" aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i key={index} />)}</div>
+      <div className="hero-cinematic__wipe" key={transitionKey} aria-hidden="true">{Array.from({ length: 7 }, (_, index) => <i key={index} style={{ '--wipe-index': index }} />)}</div>
+    </div>
+
+    <div className="hero-cinematic__content">
+      <div className="hero-cinematic__statement">
+        <div><h1>Motion</h1><p>Expert coaching.<br />Purposeful movement.</p></div>
+        <div><h1>Discipline</h1><p>Clear the noise.<br />Own every point.</p></div>
+        <div><h1>Result</h1><p>Sharper play.<br />Lasting progress.</p></div>
+      </div>
+
+      <div className="hero-cinematic__lower">
+        <div
+          className="hero-cinematic__club-card"
+          style={{ '--club-card-image': `url("${asset('aurelis-padel-balls-card.jpg')}")` }}
+        ><small>Your club</small><strong>10+</strong><span>Premium courts</span><b>4.8 <i>★★★★★</i></b></div>
+        <div className="hero-cinematic__films" aria-label="Hero films">{HERO_VIDEOS.map((video, index) => <button type="button" className={activeVideo === index ? 'is-active' : ''} onClick={() => selectVideo(index)} key={video.label}><span>0{index + 1}</span><i><b /></i></button>)}</div>
+        <a className="hero-cinematic__reserve" href="#courts"><span>Reserve a court</span><Arrow /></a>
+      </div>
+    </div>
+  </section>
+    <section className="hero-benefit-rail" aria-label="Aurelis club benefits">{features.map(([icon, title, copy]) => <div key={title}>{icon}<p><strong>{title}</strong><small>{copy}</small></p></div>)}</section>
+  </>
+}
+
 function CourtCard({ court, index, icon, meta }) {
   const reduceMotion = useReducedMotion()
   const pointerX = useMotionValue(0)
@@ -318,7 +382,7 @@ function Courts() {
     ['2', 'Players', 'All', 'Levels', '60', 'Minutes'],
     ['2–4', 'Players', 'All', 'Levels', '60', 'Minutes'],
   ]
-  return <section className="section courts courts--light" id="courts"><div className="section-lead"><div className="courts__eyebrow"><small>Our courts</small><i aria-hidden="true" /></div><h2>Choose<br />your <em>game</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><p>Top-quality courts, designed for champions. Book your court in just a few clicks.</p><Button href="#courts">View all courts</Button></div>
+  return <section className="section courts courts--light" id="courts"><SportBackdrop image={asset('court-padel.jpg')} className="sport-backdrop--courts" strength={52} position="center 42%" /><div className="section-lead"><div className="courts__eyebrow"><small>Our courts</small><i aria-hidden="true" /></div><h2>Choose<br />your <em>game</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><p>Top-quality courts, designed for champions. Book your court in just a few clicks.</p><Button href="#courts">View all courts</Button></div>
     <div className="court-grid">{courts.map((court, index) => <CourtCard key={court.name} court={court} index={index} icon={icons[index]} meta={courtMeta[index]} />)}</div>
   </section>
 }
@@ -382,10 +446,10 @@ function ExperienceEditorial() {
       <div className="club-accordion" onMouseLeave={() => setHoveredImage(null)}>
         {galleryImages.map((image, imageIndex) => {
           const expanded = displayedImage === imageIndex
-          return <article key={image.src} className={`club-accordion__item${expanded ? ' is-expanded' : ''}`} tabIndex="0" onMouseEnter={() => setHoveredImage(imageIndex)} onFocus={() => setHoveredImage(imageIndex)} onBlur={() => setHoveredImage(null)} onClick={() => setActiveImage(imageIndex)}>
+          return <motion.article key={image.src} className={`club-accordion__item${expanded ? ' is-expanded' : ''}`} tabIndex="0" initial={reduceMotion ? false : { opacity: 0, y: 72 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .22 }} transition={{ duration: reduceMotion ? 0 : .68, delay: reduceMotion ? 0 : imageIndex * .1, ease: [.22, 1, .36, 1] }} onMouseEnter={() => setHoveredImage(imageIndex)} onFocus={() => setHoveredImage(imageIndex)} onBlur={() => setHoveredImage(null)} onClick={() => setActiveImage(imageIndex)}>
             <img src={asset(image.src)} alt={image.alt} loading="lazy" decoding="async" /><div className="club-accordion__shade" aria-hidden="true" />
             <div className="club-accordion__copy"><small>{expanded ? 'Featured' : String(imageIndex + 1).padStart(2, '0')}</small><span>{image.kicker}</span><h3>{image.title}</h3>{expanded ? <p>{image.copy}</p> : <b aria-hidden="true">+</b>}</div>
-          </article>
+          </motion.article>
         })}
       </div>
       <div className="club-overview__stats"><article><strong>10+</strong><span>Premium courts<small>Designed to perform</small></span></article><article><strong>25+</strong><span>Pro coaches<small>Experts in the game</small></span></article><article><strong>50k+</strong><span>Happy players<small>And growing</small></span></article><article><strong>100+</strong><span>Monthly events<small>Play. Compete. Connect.</small></span></article></div>
@@ -415,7 +479,7 @@ function Academy() {
     event.currentTarget.style.setProperty('--glow-x', `${event.clientX - bounds.left}px`)
     event.currentTarget.style.setProperty('--glow-y', `${event.clientY - bounds.top}px`)
   }
-  return <section className="academy academy--showcase" id="academy">
+  return <section className="academy academy--showcase" id="academy"><SportBackdrop image={asset('aurelis-academy.webp')} className="sport-backdrop--academy" strength={38} position="center 35%" />
     <motion.div className="academy__intro" initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .75 }}>
       <div className="academy__eyebrow"><small>Aurelis academy</small><i aria-hidden="true" /></div>
       <h2>Train.<br />Improve.<br /><em>Achieve.</em></h2>
@@ -444,7 +508,7 @@ function Events() {
     event.currentTarget.style.setProperty('--event-x', `${event.clientX - bounds.left}px`)
     event.currentTarget.style.setProperty('--event-y', `${event.clientY - bounds.top}px`)
   }
-  return <section className="events" id="events"><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]} onPointerMove={followEventCursor}><a className="event-card__link" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`} aria-label={`Open ${e[3]}`} /><span className="event-card__cursor">Register</span><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><p>Register <Arrow /></p></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
+  return <section className="events" id="events"><SportBackdrop image={asset('court-double.jpg')} className="sport-backdrop--events" strength={34} position="center 62%" /><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]} onPointerMove={followEventCursor}><a className="event-card__link" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`} aria-label={`Open ${e[3]}`} /><span className="event-card__cursor">Register</span><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><p>Register <Arrow /></p></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
 }
 
 const technologyFeatures = [
