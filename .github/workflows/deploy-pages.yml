@@ -2,7 +2,7 @@ name: Deploy Aurelis to GitHub Pages
 
 on:
   push:
-    branches: [version-3]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
