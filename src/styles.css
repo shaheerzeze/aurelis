@@ -498,16 +498,12 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 @media(max-width:1250px){.academy-grid.academy-grid--showcase .academy-card{grid-template-rows:330px 270px}.academy-grid.academy-grid--showcase .academy-card__media{height:330px}.academy-grid.academy-grid--showcase .academy-card__body{height:270px!important;padding:24px 16px 22px!important}}
 @media(max-width:900px){.academy-grid.academy-grid--showcase .academy-card{grid-template-rows:340px 270px}.academy-grid.academy-grid--showcase .academy-card__media{height:340px}}
 
-/* Academy finishing pass: square geometry, clean logo/icons, cursor-side glow. */
-.academy-grid.academy-grid--showcase article{--glow-x:50%;--glow-y:50%;clip-path:none;border-radius:0;isolation:isolate}
-.academy-grid.academy-grid--showcase article:before{content:'';position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:radial-gradient(170px circle at var(--glow-x) var(--glow-y),rgba(79,124,255,.22),rgba(79,124,255,.09) 28%,transparent 68%);box-shadow:inset 0 0 0 1px rgba(79,124,255,.72);transition:opacity .3s ease}
-.academy-grid.academy-grid--showcase article:hover:before{opacity:1}
-.academy-grid.academy-grid--showcase article:hover{transform:translateY(-6px);border-color:rgba(79,124,255,.44);box-shadow:0 28px 75px rgba(0,0,0,.48)}
-.academy-grid.academy-grid--showcase article{cursor:none}
-.academy-card__cursor{position:absolute;z-index:7;left:var(--glow-x,50%);top:var(--glow-y,50%);min-width:6.5rem;height:2.75rem;padding:0 1.15rem;border:none;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--primary);color:#fff;box-shadow:0 10px 22px rgba(0,0,0,.4);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7) rotate(-8deg);transition:opacity .18s ease,transform .34s cubic-bezier(.22,1,.36,1)}
-.academy-card__cursor .ui-icon{color:#fff;font-size:1rem}
-.academy-grid.academy-grid--showcase article:hover .academy-card__cursor{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg)}
-@media(pointer:coarse),(prefers-reduced-motion:reduce){.academy-grid.academy-grid--showcase article{cursor:pointer}.academy-card__cursor{display:none}}
+/* Academy finishing pass: square geometry and restrained card interaction. */
+.academy-grid.academy-grid--showcase article{clip-path:none;border-radius:0;isolation:isolate;cursor:default}
+.academy-grid.academy-grid--showcase .academy-card:hover{transform:translateY(-4px);border-color:rgba(79,124,255,.42);box-shadow:0 22px 52px rgba(0,0,0,.38)}
+.academy-card__body a,.academy-membership>a{position:relative;padding-bottom:.45rem}
+.academy-card__body a::after,.academy-membership>a::after{content:'';position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+.academy-card__body a:hover::after,.academy-card__body a:focus-visible::after,.academy-membership>a:hover::after,.academy-membership>a:focus-visible::after{transform:scaleX(1)}
 .academy-grid.academy-grid--showcase .academy-membership{cursor:auto}
 .academy-grid.academy-grid--showcase .academy-membership:before{display:none}
 .academy-grid.academy-grid--showcase .academy-membership:hover{transform:none;border-color:rgba(255,255,255,.2);box-shadow:0 24px 70px rgba(0,0,0,.28)}
