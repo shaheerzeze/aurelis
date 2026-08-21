@@ -62,6 +62,23 @@ function PadelIcon({ className = '' }) {
   )
 }
 
+function PadelOutlineIcon({ className = '' }) {
+  return (
+    <svg className={`padel-outline-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <g transform="rotate(-45 11 12)">
+        <rect x="6" y="2" width="10" height="13" rx="4" />
+        <path d="M11 15v6.5M9.5 21.5h3" />
+        <circle cx="9" cy="6" r=".45" fill="currentColor" stroke="none" />
+        <circle cx="13" cy="6" r=".45" fill="currentColor" stroke="none" />
+        <circle cx="9" cy="9" r=".45" fill="currentColor" stroke="none" />
+        <circle cx="13" cy="9" r=".45" fill="currentColor" stroke="none" />
+        <circle cx="11" cy="12" r=".45" fill="currentColor" stroke="none" />
+      </g>
+      <circle cx="19.2" cy="4.3" r="2" />
+    </svg>
+  )
+}
+
 function CoachIcon({ className = '' }) {
   return (
     <svg className={`ui-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -284,7 +301,7 @@ function HeroOriginal() {
   }
 
   const benefits = [
-    [<PadelIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<PadelOutlineIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
     [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
     [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
     [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
@@ -311,7 +328,7 @@ function Hero() {
   const [activeVideo, setActiveVideo] = useState(0)
   const [transitionKey, setTransitionKey] = useState(0)
   const features = [
-    [<PadelIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<PadelOutlineIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
     [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
     [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
     [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
