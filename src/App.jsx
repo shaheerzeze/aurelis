@@ -155,32 +155,6 @@ function Header() {
   </nav><a className="header-book" href="#courts">Book a court</a></header>
 }
 
-function TypewriterPhrase() {
-  const phrases = ['the game', 'the limits', 'the ordinary', 'the moment']
-  const [phraseIndex, setPhraseIndex] = useState(0)
-  const [text, setText] = useState(phrases[0])
-  const [deleting, setDeleting] = useState(false)
-
-  useEffect(() => {
-    const phrase = phrases[phraseIndex]
-    const complete = text === phrase
-    const empty = text.length === 0
-    const delay = complete && !deleting ? 1500 : deleting ? 48 : 82
-    const timer = window.setTimeout(() => {
-      if (complete && !deleting) return setDeleting(true)
-      if (empty && deleting) {
-        setDeleting(false)
-        setPhraseIndex(index => (index + 1) % phrases.length)
-        return
-      }
-      setText(deleting ? phrase.slice(0, text.length - 1) : phrase.slice(0, text.length + 1))
-    }, delay)
-    return () => window.clearTimeout(timer)
-  }, [text, deleting, phraseIndex])
-
-  return <em className="typewriter" aria-live="polite">{text}<span className="typewriter__caret" aria-hidden="true" /></em>
-}
-
 function HeroTargetCursor() {
   const cursorRef = useRef(null)
 
@@ -259,69 +233,6 @@ function HeroTargetCursor() {
   }, [])
 
   return <div ref={cursorRef} className="hero-target-cursor" aria-hidden="true"><i /><i /><i /><i /><span /></div>
-}
-
-function HeroOriginal() {
-  const [activeVideo, setActiveVideo] = useState(0)
-  const [incomingVideo, setIncomingVideo] = useState(null)
-  const incomingVideoRef = useRef(null)
-  const resumeTimeRef = useRef(0)
-
-  const startVideoTransition = nextVideo => {
-    if (nextVideo === activeVideo || incomingVideo !== null) return
-    setIncomingVideo(nextVideo)
-  }
-
-  useEffect(() => {
-    if (incomingVideo !== null) return undefined
-    const timer = window.setTimeout(() => startVideoTransition((activeVideo + 1) % HERO_VIDEOS.length), 5000)
-    return () => window.clearTimeout(timer)
-  }, [activeVideo, incomingVideo])
-
-  useEffect(() => {
-    if (incomingVideo === null) return undefined
-    const timer = window.setTimeout(() => {
-      resumeTimeRef.current = incomingVideoRef.current?.currentTime || 0
-      setActiveVideo(incomingVideo)
-      setIncomingVideo(null)
-    }, 600)
-    return () => window.clearTimeout(timer)
-  }, [incomingVideo])
-
-  const resumeIncomingPlayback = event => {
-    if (resumeTimeRef.current <= 0) return
-    event.currentTarget.currentTime = resumeTimeRef.current
-    resumeTimeRef.current = 0
-  }
-
-  const playPreview = event => { event.currentTarget.querySelector('video')?.play().catch(() => {}) }
-  const pausePreview = event => {
-    const previewVideo = event.currentTarget.querySelector('video')
-    if (previewVideo) { previewVideo.pause(); previewVideo.currentTime = 0 }
-  }
-
-  const benefits = [
-    [<PadelOutlineIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
-    [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
-    [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
-    [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
-  ]
-  return <section className="hero hero--campaign hero--restored" id="home"><Header /><HeroTargetCursor /><video key={activeVideo} className="hero__image hero__video" autoPlay muted loop playsInline preload="metadata" onLoadedMetadata={resumeIncomingPlayback} poster={asset('aurelis-hero-poster.jpg')} aria-label={HERO_VIDEOS[activeVideo].label}><source media="(max-width: 700px)" src={HERO_VIDEOS[activeVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[activeVideo].src} type="video/mp4" /></video>
-    {incomingVideo !== null && <video ref={incomingVideoRef} key={`incoming-${incomingVideo}`} className="hero__image hero__video hero__video--incoming" autoPlay muted loop playsInline preload="auto" poster={asset('aurelis-hero-poster.jpg')} aria-hidden="true"><source media="(max-width: 700px)" src={HERO_VIDEOS[incomingVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[incomingVideo].src} type="video/mp4" /></video>}
-    <div className="hero__slice-lines" aria-hidden="true">{Array.from({ length: 6 }, (_, index) => <i key={index} style={{ '--slice': index + 1 }} />)}</div>
-    <div className="hero__shade" /><motion.div className="hero__copy" initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .8 }}>
-      <p className="eyebrow">Premium padel & tennis club</p>
-      <h1 className="hero__statement"><span>Focus</span><i /><em>Play</em><i /><span>Win</span></h1>
-      <div className="hero__actions"><Button>Book a court</Button><Button secondary href="#experience">Explore the club</Button></div>
-    </motion.div>
-    <div className="hero__previews">
-        <span className="hero__index"><b>0{activeVideo + 1}</b><span className="hero__track"><i className="hero__loading-line" key={`loading-${activeVideo}`} /></span></span>
-      <div>{HERO_VIDEOS.map((video, index) => <button type="button" className={activeVideo === index ? 'is-active' : ''} onClick={() => startVideoTransition(index)} onMouseEnter={playPreview} onMouseLeave={pausePreview} onFocus={playPreview} onBlur={pausePreview} key={video.label} aria-label={`Play ${video.label}`} aria-pressed={activeVideo === index}><video muted loop playsInline preload="metadata" poster={asset('aurelis-hero-poster.jpg')}><source src={video.mobile} type="video/mp4" /></video><span key={`thumb-line-${activeVideo}`} /></button>)}</div>
-      <p><strong>World-class facilities</strong><span>Indoor & outdoor courts<br />Built for champions</span></p>
-    </div>
-    <a className="hero__scroll-cue" href="#courts"><span>Scroll down</span><i><b /></i></a>
-    <div className="hero__benefits">{benefits.map(([icon, title, copy]) => <div key={title}>{icon}<p><strong>{title}</strong><small>{copy}</small></p></div>)}</div>
-  </section>
 }
 
 function Hero() {
@@ -411,10 +322,6 @@ function Courts() {
   return <section className="section courts courts--light" id="courts"><SportBackdrop image={asset('court-padel.jpg')} className="sport-backdrop--courts" strength={52} position="center 42%" /><div className="section-lead"><div className="courts__eyebrow"><small>Our courts</small><i aria-hidden="true" /></div><h2>Choose<br />your <em>game</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><p>Top-quality courts, designed for champions. Book your court in just a few clicks.</p><Button href="#courts">View all courts</Button></div>
     <div className="court-grid">{courts.map((court, index) => <CourtCard key={court.name} court={court} index={index} icon={icons[index]} meta={courtMeta[index]} />)}</div>
   </section>
-}
-
-function Experience() {
-  return <section className="experience" id="experience"><div className="experience__copy"><small>Experience Aurelis</small><h2>Where sport<br />meets lifestyle</h2><p>From intense matches to unforgettable moments with your people.</p><Button secondary>Watch the experience</Button></div><div className="experience__feature"><img src={asset('aurelis-hero-branded.webp')} alt="Aurelis courts and clubhouse at night" /><button type="button" className="experience__play" aria-label="Play the Aurelis club experience"><span>▶</span></button></div><div className="experience__tiles"><img src={asset('aurelis-lounge.webp')} alt="Club lounge" /><img src={asset('aurelis-community.webp')} alt="Padel match" /><img src={asset('aurelis-court-branded.webp')} alt="Aurelis court details" /></div></section>
 }
 
 function ExperienceEditorial() {
@@ -524,94 +431,6 @@ function Academy() {
 function Events() {
   const eventSlugs = ['beginner-padel-evening', 'mixed-doubles-tournament', 'academy-open-day']
   return <section className="events" id="events"><SportBackdrop image={asset('court-double.jpg')} className="sport-backdrop--events" strength={34} position="center 62%" /><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]}><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><a className="event-card__action" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`}>Register <Arrow /></a></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
-}
-
-const technologyFeatures = [
-  { icon: 'ri-lock-unlock-line', title: 'Self check-in', copy: 'Access the club instantly.' },
-  { icon: 'ri-calendar-check-line', title: '24/7 access', copy: 'Your time. Your court.' },
-  { icon: 'ri-ping-pong-line', title: 'Equipment rental', copy: 'Premium gear, ready when you are.' },
-  { icon: 'ri-shield-check-line', title: 'Damage detection', copy: 'AI-powered protection for fair play.' },
-]
-
-function Technology() {
-  const sectionRef = useRef(null)
-  const phoneRef = useRef(null)
-
-  useGSAP(() => {
-    const media = gsap.matchMedia()
-
-    media.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.fromTo(phoneRef.current,
-        { y: 180, autoAlpha: 0, rotateX: 8, scale: .92 },
-        {
-          y: 0,
-          autoAlpha: 1,
-          rotateX: 0,
-          scale: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 88%',
-            end: 'top 28%',
-            scrub: .65,
-            invalidateOnRefresh: true,
-          },
-        })
-
-      gsap.from('.technology__feature', {
-        y: 42,
-        autoAlpha: 0,
-        stagger: .12,
-        duration: .75,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.technology__features',
-          start: 'top 78%',
-          toggleActions: 'play none none reverse',
-        },
-      })
-    })
-
-    media.add('(max-width: 900px) and (prefers-reduced-motion: no-preference)', () => {
-      gsap.from(phoneRef.current, {
-        y: 90,
-        autoAlpha: 0,
-        scale: .94,
-        duration: .9,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: phoneRef.current, start: 'top 88%', once: true },
-      })
-    })
-
-    return () => media.revert()
-  }, { scope: sectionRef })
-
-  return <section className="technology-showcase" id="technology" ref={sectionRef}>
-    <div className="technology-showcase__decor technology-showcase__decor--dots" aria-hidden="true" />
-    <div className="technology-showcase__decor technology-showcase__decor--stripes" aria-hidden="true" />
-    <div className="technology-showcase__intro">
-      <div className="technology-showcase__eyebrow"><b>03</b><span>Technology</span></div>
-      <h2>Smart.<br />Seamless.<br /><em>Effortless.</em></h2>
-      <i className="technology-showcase__slashes" aria-hidden="true" />
-      <p>Self check-in. 24/7 access. Equipment rental. AI damage detection. Everything you need, in one powerful system.</p>
-      <a className="technology-showcase__cta" href="#contact"><span>See how it works</span><Arrow /></a>
-    </div>
-    <div className="technology-showcase__phone-column">
-      <div className="technology-phone" ref={phoneRef}>
-        <div className="technology-phone__speaker" />
-        <div className="technology-phone__screen">
-          <header><img className="technology-phone__logo" src={asset('aurelis-logo-new.png')} alt="Aurelis Sports Club" /><i className="ri-notification-3-line" /></header>
-          <h3>Good evening, <em>Alex</em></h3>
-          <section className="phone-access"><small>Club access</small><strong>Unlocked</strong><p>Welcome back.<br />Enjoy your game.</p><i className="ri-lock-unlock-line" /></section>
-          <section className="phone-match"><div><small>Next match</small><strong>Today · 20:00</strong><span><i className="ri-map-pin-line" /> Court 2</span><span><i className="ri-time-line" /> 90 min</span><div className="phone-avatars"><b>A</b><b>M</b><b>J</b><b>+1</b></div></div><img src={asset('court-padel.jpg')} alt="Aurelis court" /></section>
-          <div className="phone-actions"><button><i className="ri-calendar-check-line" />Book a court <Arrow /></button><button><i className="ri-ping-pong-line" />Rent equipment <Arrow /></button></div>
-          <section className="phone-availability"><small>Court availability</small><div className="phone-times"><span>18:00</span><span>19:00</span><span>20:00</span><span>21:00</span><span>22:00</span></div>{[1, 2, 3].map(row => <div className="phone-slots" key={row}><b>Court {row}</b>{[0, 1, 2, 3, 4].map(slot => <i className={slot === 2 && row === 2 ? 'is-booked' : slot % 3 === 0 ? 'is-open' : ''} key={slot} />)}</div>)}</section>
-          <nav className="phone-nav"><b><i className="ri-home-4-line" />Home</b><span><i className="ri-calendar-line" />Book</span><span><i className="ri-team-line" />Community</span><span><i className="ri-user-line" />Profile</span></nav>
-        </div>
-      </div>
-    </div>
-    <div className="technology__features">{technologyFeatures.map(feature => <article className="technology__feature" key={feature.title}><div><i className={feature.icon} /></div><span><h3>{feature.title}</h3><p>{feature.copy}</p><i /></span></article>)}</div>
-  </section>
 }
 
 function FAQ() {
