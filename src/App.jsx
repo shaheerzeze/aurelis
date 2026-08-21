@@ -86,8 +86,18 @@ function GroupIcon({ className = '' }) {
   )
 }
 
+function BenefitIcon({ type }) {
+  const common = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.45, strokeLinecap: 'round', strokeLinejoin: 'round' }
+  return <svg className="benefit-icon" viewBox="0 0 24 24" aria-hidden="true" {...common}>
+    {type === 'court' && <><ellipse cx="8.5" cy="8" rx="4.6" ry="5.8" transform="rotate(-35 8.5 8)" /><path d="m11.8 12.4 7 7M16.8 17.4l-2.2 2.2" /><circle cx="18.2" cy="5.2" r="2" /></>}
+    {type === 'coach' && <><circle cx="9" cy="7" r="3.2" /><path d="M3.8 20v-2.2A5.2 5.2 0 0 1 9 12.6a5.2 5.2 0 0 1 5.2 5.2V20M16 8.5l1.7 1.7L21 6.8" /></>}
+    {type === 'events' && <><rect x="3.5" y="5.5" width="17" height="15" rx="1.5" /><path d="M7.5 3v5M16.5 3v5M3.5 10h17m-12 4.5 2.2 2.2 4.8-4.8" /></>}
+    {type === 'community' && <><circle cx="12" cy="7" r="3" /><circle cx="5.5" cy="9" r="2" /><circle cx="18.5" cy="9" r="2" /><path d="M6.5 20v-2.3A5.5 5.5 0 0 1 12 12.2a5.5 5.5 0 0 1 5.5 5.5V20M2.5 19v-1.5a3.5 3.5 0 0 1 3.5-3.5M21.5 19v-1.5A3.5 3.5 0 0 0 18 14" /></>}
+  </svg>
+}
+
 function Brand() {
-  return <a className="brand" href="#home" aria-label="Aurelis home"><img src={asset('aurelis-mark.svg')} alt="" /><span><b>Aurelis</b><small>Padel & tennis club</small></span></a>
+  return <a className="brand" href="#home" aria-label="Aurelis home"><img className="brand__logo" src={asset('aurelis-logo-new.png')} alt="Aurelis Sports Club" /></a>
 }
 
 function Button({ children, secondary = false, href = '#courts' }) {
@@ -275,10 +285,10 @@ function HeroOriginal() {
   }
 
   const benefits = [
-    [<PadelIcon key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
-    [<CoachIcon key="coach" />, 'Expert coaches', 'Certified for every level'],
-    [<EventsIcon key="events" />, 'Events & tournaments', 'Competitive play all year'],
-    [<GroupIcon key="group" />, 'Vibrant community', 'Play, connect and belong'],
+    [<BenefitIcon type="court" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
+    [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
+    [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
   ]
   return <section className="hero hero--campaign hero--restored" id="home"><Header /><HeroTargetCursor /><video key={activeVideo} className="hero__image hero__video" autoPlay muted loop playsInline preload="metadata" onLoadedMetadata={resumeIncomingPlayback} poster={asset('aurelis-hero-poster.jpg')} aria-label={HERO_VIDEOS[activeVideo].label}><source media="(max-width: 700px)" src={HERO_VIDEOS[activeVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[activeVideo].src} type="video/mp4" /></video>
     {incomingVideo !== null && <video ref={incomingVideoRef} key={`incoming-${incomingVideo}`} className="hero__image hero__video hero__video--incoming" autoPlay muted loop playsInline preload="auto" poster={asset('aurelis-hero-poster.jpg')} aria-hidden="true"><source media="(max-width: 700px)" src={HERO_VIDEOS[incomingVideo].mobile} type="video/mp4" /><source src={HERO_VIDEOS[incomingVideo].src} type="video/mp4" /></video>}
@@ -302,10 +312,10 @@ function Hero() {
   const [activeVideo, setActiveVideo] = useState(0)
   const [transitionKey, setTransitionKey] = useState(0)
   const features = [
-    [<PadelIcon key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
-    [<CoachIcon key="coach" />, 'Expert coaches', 'Certified for every level'],
-    [<EventsIcon key="events" />, 'Events & tournaments', 'Competitive play all year'],
-    [<GroupIcon key="group" />, 'Vibrant community', 'Play, connect and belong'],
+    [<BenefitIcon type="court" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
+    [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
+    [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
   ]
 
   useEffect(() => {
@@ -487,7 +497,7 @@ function Academy() {
       <div className="academy-card__body"><i className={programIcons[index]} /><h3>{item.name}</h3><span /><p>{item.copy}</p><a href="#contact">Learn more <Arrow /></a></div>
     </motion.article>)}
       <motion.article className="academy-membership" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: .36, ease: [.22, 1, .36, 1] }}>
-        <div className="academy-membership__mark"><img src={asset('aurelis-mark.svg')} alt="Aurelis" /></div><h3>Academy<br />membership</h3><span />
+        <div className="academy-membership__mark"><img src={asset('aurelis-logo-new.png')} alt="Aurelis Sports Club" /></div><h3>Academy<br />membership</h3><span />
         <ul><li><img src={asset('icons/duration.svg')} alt="" />More sessions.</li><li><img src={asset('icons/levels.svg')} alt="" />More benefits.</li><li><img src={asset('icons/players.svg')} alt="" />One community.</li></ul>
         <a href="#contact">Learn more <Arrow /></a>
       </motion.article>
@@ -574,7 +584,7 @@ function Technology() {
       <div className="technology-phone" ref={phoneRef}>
         <div className="technology-phone__speaker" />
         <div className="technology-phone__screen">
-          <header><img src={asset('aurelis-mark.svg')} alt="" /><b>Aurelis</b><span>Padel club</span><i className="ri-notification-3-line" /></header>
+          <header><img className="technology-phone__logo" src={asset('aurelis-logo-new.png')} alt="Aurelis Sports Club" /><i className="ri-notification-3-line" /></header>
           <h3>Good evening, <em>Alex</em></h3>
           <section className="phone-access"><small>Club access</small><strong>Unlocked</strong><p>Welcome back.<br />Enjoy your game.</p><i className="ri-lock-unlock-line" /></section>
           <section className="phone-match"><div><small>Next match</small><strong>Today · 20:00</strong><span><i className="ri-map-pin-line" /> Court 2</span><span><i className="ri-time-line" /> 90 min</span><div className="phone-avatars"><b>A</b><b>M</b><b>J</b><b>+1</b></div></div><img src={asset('court-padel.jpg')} alt="Aurelis court" /></section>
@@ -603,7 +613,7 @@ function Footer() {
 
 function SponsorMarquee() {
   const sponsors = Array.from({ length: 8 })
-  return <section className="sponsors" id="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo.svg')} alt={group === 0 && index === 0 ? 'Aurelis' : ''} loading="lazy" decoding="async" /></div>)}</div>)}</div></div></section>
+  return <section className="sponsors" id="sponsors" aria-label="Aurelis sponsors"><div className="sponsors__viewport"><div className="sponsors__track">{[0, 1].map(group => <div className="sponsors__group" aria-hidden={group === 1} key={group}>{sponsors.map((_, index) => <div className="sponsors__item" key={`${group}-${index}`}><img src={asset('aurelis-logo-new.png')} alt={group === 0 && index === 0 ? 'Aurelis Sports Club' : ''} loading="lazy" decoding="async" /></div>)}</div>)}</div></div></section>
 }
 
 function FloatingActions() {

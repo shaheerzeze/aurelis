@@ -963,7 +963,18 @@ footer .footer__brand,footer .footer__column{display:flex;flex-direction:column;
 main,.footer--modern,.floating-actions{--color-conversion:var(--color-primary);--acid:var(--color-primary)}
 .floating-actions .floating-book{background:#dfff63!important;border-color:#07110e;color:#07110e!important}
 .floating-actions .floating-book:before{background:#efffa8!important}
+/* New supplied brand lockup: white on dark surfaces, black on light surfaces. */
+.brand{width:clamp(10.5rem,15vw,13.5rem);height:auto}
+.brand .brand__logo{display:block;width:100%!important;height:auto!important;max-height:3.65rem;object-fit:contain;object-position:left center;filter:brightness(0) invert(1)!important}
+.hero--campaign .brand .brand__logo,.hero--cinematic .brand .brand__logo{filter:brightness(0) invert(1)!important}
+.hero--cinematic .header.header--scrolled .brand .brand__logo{filter:brightness(0)!important}
+.footer__brand .brand .brand__logo{filter:brightness(0)!important}
+.academy-grid.academy-grid--showcase .academy-membership__mark{width:11rem;height:3.2rem;margin-bottom:2.25rem}
+.academy-membership__mark img{width:100%;height:100%;object-fit:contain;object-position:left center;filter:brightness(0) invert(1);opacity:1}
+.technology-phone__screen>header{grid-template-columns:1fr auto}
+.technology-phone__screen>header .technology-phone__logo{width:7.25rem!important;height:auto;filter:brightness(0) invert(1)}
+.benefit-icon{font-size:1.75rem!important;font-weight:400!important;line-height:1;-webkit-text-stroke:0}
 @media(max-width:980px){.nav a:last-child{display:none}}
 @media(max-width:760px){.footer--modern .footer__main{grid-template-columns:1fr!important}.footer__nav-row{grid-template-columns:repeat(2,1fr)}.footer__contact{grid-column:1/-1}}
-@media(max-width:700px){.nav a:nth-child(n+4){display:none}.hero__index{display:none!important}.floating-book{font-size:11.5px!important}}
+@media(max-width:700px){.nav a:nth-child(n+4){display:none}.hero__index{display:none!important}.floating-book{font-size:11.5px!important}.brand{width:9.5rem}.brand .brand__logo{max-height:2.75rem}}
 @media(max-width:480px){.footer__nav-row{grid-template-columns:1fr;gap:1.75rem}}
