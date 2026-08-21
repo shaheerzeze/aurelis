@@ -808,7 +808,7 @@ footer .footer__brand,footer .footer__column{display:flex;flex-direction:column;
 .club-overview__lead>p{max-width:31rem;margin:0 0 2.2rem;font-size:clamp(.8rem,.95vw,1rem);line-height:1.75}
 .club-overview__features{display:grid;gap:0;margin-bottom:2rem}
 .club-overview__features article{display:grid;grid-template-columns:3.75rem 1fr;gap:1rem;align-items:center;padding:1rem 0;border-bottom:1px solid rgba(17,25,22,.13)}
-.club-overview__features img{width:2.2rem;height:2.2rem;filter:brightness(0) saturate(100%)}
+.club-overview__features img,.club-overview__feature-icon{width:2.2rem;height:2.2rem;color:var(--color-ink);filter:brightness(0) saturate(100%)}
 .club-overview__features div{display:grid;gap:.25rem}.club-overview__features strong{text-transform:uppercase;font-size:.82rem;letter-spacing:.04em}
 .club-overview__features span{font-size:.8rem;line-height:1.55;color:rgba(17,25,22,.68)}
 .club-overview__cta{display:flex;align-items:center;justify-content:space-between;width:min(100%,17rem);padding:.85rem 0;border-bottom:2px solid var(--color-primary);color:var(--color-primary);text-decoration:none;text-transform:uppercase;font-weight:800;letter-spacing:.09em;font-size:.78rem;transition:padding .3s ease,color .3s ease}
