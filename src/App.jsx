@@ -436,7 +436,7 @@ function ExperienceEditorial() {
       <h2>Aurelis<br /><em>club</em></h2><span className="club-overview__rule" aria-hidden="true" />
       <p>Premium courts, designed for performance.</p>
       <div className="club-overview__features">
-        <article><img src={asset('icons/court-racket.svg')} alt="" /><div><strong>Premium facilities</strong><span>State-of-the-art courts and amenities for the best experience.</span></div></article>
+        <article><PadelIcon className="club-overview__feature-icon" /><div><strong>Premium facilities</strong><span>State-of-the-art courts and amenities for the best experience.</span></div></article>
         <article><img src={asset('icons/players.svg')} alt="" /><div><strong>Expert coaching</strong><span>Programs for every level. Train with the best.</span></div></article>
       </div>
       <a className="club-overview__cta" href="#contact"><span>Register</span><Arrow /></a>
