@@ -474,11 +474,6 @@ function ExperienceEditorial() {
 
 function Academy() {
   const programIcons = ['ri-user-smile-line', 'ri-team-line', 'ri-star-line']
-  const followAcademyGlow = event => {
-    const bounds = event.currentTarget.getBoundingClientRect()
-    event.currentTarget.style.setProperty('--glow-x', `${event.clientX - bounds.left}px`)
-    event.currentTarget.style.setProperty('--glow-y', `${event.clientY - bounds.top}px`)
-  }
   return <section className="academy academy--showcase" id="academy"><SportBackdrop image={asset('aurelis-academy.webp')} className="sport-backdrop--academy" strength={38} position="center 35%" />
     <motion.div className="academy__intro" initial={{ opacity: 0, x: -36 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: .35 }} transition={{ duration: .75 }}>
       <div className="academy__eyebrow"><small>Aurelis academy</small><i aria-hidden="true" /></div>
@@ -487,10 +482,9 @@ function Academy() {
       <p>Programs and coaching designed to elevate your game to the next level.</p>
       <Button href="#contact">Discover academy</Button>
     </motion.div>
-    <div className="academy-grid academy-grid--showcase">{academy.map((item, index) => <motion.article className="academy-card" key={item.name} onMouseMove={followAcademyGlow} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: index * .12, ease: [.22, 1, .36, 1] }}>
+    <div className="academy-grid academy-grid--showcase">{academy.map((item, index) => <motion.article className="academy-card" key={item.name} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: index * .12, ease: [.22, 1, .36, 1] }}>
       <div className="academy-card__media"><b>0{index + 1}</b><i /><img src={asset('aurelis-academy.webp')} style={{ objectPosition: item.pos }} alt={item.name} loading="lazy" decoding="async" /></div>
       <div className="academy-card__body"><i className={programIcons[index]} /><h3>{item.name}</h3><span /><p>{item.copy}</p><a href="#contact">Learn more <Arrow /></a></div>
-      <span className="academy-card__cursor">Learn more<Arrow /></span>
     </motion.article>)}
       <motion.article className="academy-membership" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .18 }} transition={{ duration: .7, delay: .36, ease: [.22, 1, .36, 1] }}>
         <div className="academy-membership__mark"><img src={asset('aurelis-mark.svg')} alt="Aurelis" /></div><h3>Academy<br />membership</h3><span />
@@ -503,12 +497,7 @@ function Academy() {
 
 function Events() {
   const eventSlugs = ['beginner-padel-evening', 'mixed-doubles-tournament', 'academy-open-day']
-  const followEventCursor = event => {
-    const bounds = event.currentTarget.getBoundingClientRect()
-    event.currentTarget.style.setProperty('--event-x', `${event.clientX - bounds.left}px`)
-    event.currentTarget.style.setProperty('--event-y', `${event.clientY - bounds.top}px`)
-  }
-  return <section className="events" id="events"><SportBackdrop image={asset('court-double.jpg')} className="sport-backdrop--events" strength={34} position="center 62%" /><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]} onPointerMove={followEventCursor}><a className="event-card__link" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`} aria-label={`Open ${e[3]}`} /><span className="event-card__cursor">Register</span><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><p>Register <Arrow /></p></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
+  return <section className="events" id="events"><SportBackdrop image={asset('court-double.jpg')} className="sport-backdrop--events" strength={34} position="center 62%" /><div className="events__title"><div className="events__eyebrow"><small>Upcoming events</small><i aria-hidden="true" /></div><h2>Club<br /><em>calendar</em></h2><span className="section-heading__bottom-rule" aria-hidden="true" /><a href="#events">View all events <Arrow /></a></div><div className="event-grid">{events.map((e, index) => <article key={e[0]}><div><strong>{e[0]}</strong><span>{e[1]}</span><small>{e[2]}</small></div><h3>{e[3]}</h3><a className="event-card__action" href={`${import.meta.env.BASE_URL}events/${eventSlugs[index]}`}>Register <Arrow /></a></article>)}</div><div className="stats"><strong>5+ <small>premium courts</small></strong><strong>20+ <small>pro coaches</small></strong><strong>50k+ <small>happy players</small></strong></div></section>
 }
 
 const technologyFeatures = [
