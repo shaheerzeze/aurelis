@@ -433,7 +433,7 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 .court-card__meta b{font:800 9px/1.05 var(--font-ui);color:#1d2824;text-transform:uppercase}
 .court-card__meta small{font:700 6.5px/1.2 var(--font-ui);letter-spacing:.035em;color:#69726f;text-transform:uppercase}
 .courts--light .court-card__price{order:1;height:auto;display:flex;align-items:center;gap:12px;margin:0;padding:0;border-bottom:1px solid #e1e6e3}
-.courts--light .court-card__price strong{font:750 39px/.95 var(--font-ui);color:#7e8b45;letter-spacing:-.05em}
+.courts--light .court-card__price strong{font:750 39px/.95 var(--font-ui);color:var(--primary);letter-spacing:-.05em}
 .courts--light .court-card__price small{font-size:10px;color:#3d4844}
 .court-card__book{order:2;position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;width:100%;height:58px;padding:0 3px;color:#141b18;text-transform:uppercase;font:800 10px var(--font-ui);overflow:hidden}
 .court-card__book::before{content:'';position:absolute;z-index:-1;inset:0;background:var(--primary);transform:translateY(101%);transition:transform .42s cubic-bezier(.22,1,.36,1)}
@@ -504,8 +504,8 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 .academy-grid.academy-grid--showcase article:hover:before{opacity:1}
 .academy-grid.academy-grid--showcase article:hover{transform:translateY(-6px);border-color:rgba(79,124,255,.44);box-shadow:0 28px 75px rgba(0,0,0,.48)}
 .academy-grid.academy-grid--showcase article{cursor:none}
-.academy-card__cursor{position:absolute;z-index:7;left:var(--glow-x,50%);top:var(--glow-y,50%);min-width:6.5rem;height:2.75rem;padding:0 1.15rem;border:none;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--color-conversion);color:var(--color-ink);box-shadow:0 10px 22px rgba(0,0,0,.4);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7) rotate(-8deg);transition:opacity .18s ease,transform .34s cubic-bezier(.22,1,.36,1)}
-.academy-card__cursor .ui-icon{color:var(--color-ink);font-size:1rem}
+.academy-card__cursor{position:absolute;z-index:7;left:var(--glow-x,50%);top:var(--glow-y,50%);min-width:6.5rem;height:2.75rem;padding:0 1.15rem;border:none;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:.5rem;background:var(--primary);color:#fff;box-shadow:0 10px 22px rgba(0,0,0,.4);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.7) rotate(-8deg);transition:opacity .18s ease,transform .34s cubic-bezier(.22,1,.36,1)}
+.academy-card__cursor .ui-icon{color:#fff;font-size:1rem}
 .academy-grid.academy-grid--showcase article:hover .academy-card__cursor{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg)}
 @media(pointer:coarse),(prefers-reduced-motion:reduce){.academy-grid.academy-grid--showcase article{cursor:pointer}.academy-card__cursor{display:none}}
 .academy-grid.academy-grid--showcase .academy-membership{cursor:auto}
@@ -558,9 +558,9 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 .floating-actions{position:fixed;inset:auto 0 0;z-index:80;pointer-events:none}
 .floating-actions.is-visible{pointer-events:auto}
 .floating-book,.floating-chat{position:absolute;bottom:28px;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 44px rgba(3,14,11,.22);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.floating-book{left:28px;justify-content:space-between;width:178px;height:58px;padding:0 20px;background:#dfff63;color:#07100d;border:1px solid rgba(7,16,13,.82);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.055em;overflow:hidden}
-.floating-book:before{content:'';position:absolute;inset:0;background:#f4ffb8;transform:translateX(-102%);transition:transform .42s cubic-bezier(.22,1,.36,1)}.floating-book:hover:before{transform:none}.floating-book>*{position:relative;z-index:1}.floating-book>span:last-child{font-size:22px;transition:transform .3s}.floating-book:hover>span:last-child{transform:translateX(5px)}
-.floating-chat{right:28px;width:58px;height:58px;background:rgba(15,45,126,.94);color:#fff;border:1px solid rgba(147,172,255,.48)}.floating-chat>i{font-size:25px}.floating-chat:before{content:'';position:absolute;inset:7px;border:1px solid rgba(255,255,255,.15);transition:inset .3s,border-color .3s}.floating-chat:hover:before{inset:4px;border-color:rgba(255,255,255,.45)}.floating-chat__dot{position:absolute;right:7px;top:7px;width:7px;height:7px;border-radius:50%;background:#dfff63;box-shadow:0 0 12px rgba(223,255,99,.85)}
+.floating-book{left:28px;justify-content:space-between;width:178px;height:58px;padding:0 20px;background:var(--primary);color:#fff;border:1px solid var(--primary-deep);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.055em;overflow:hidden}
+.floating-book:before{content:'';position:absolute;inset:0;background:var(--primary-bright);transform:translateX(-102%);transition:transform .42s cubic-bezier(.22,1,.36,1)}.floating-book:hover:before{transform:none}.floating-book>*{position:relative;z-index:1}.floating-book>span:last-child{font-size:22px;transition:transform .3s}.floating-book:hover>span:last-child{transform:translateX(5px)}
+.floating-chat{right:28px;width:58px;height:58px;background:rgba(15,45,126,.94);color:#fff;border:1px solid rgba(147,172,255,.48)}.floating-chat>i{font-size:25px}.floating-chat:before{content:'';position:absolute;inset:7px;border:1px solid rgba(255,255,255,.15);transition:inset .3s,border-color .3s}.floating-chat:hover:before{inset:4px;border-color:rgba(255,255,255,.45)}.floating-chat__dot{position:absolute;right:7px;top:7px;width:7px;height:7px;border-radius:50%;background:var(--primary-bright);box-shadow:0 0 12px rgba(63,114,255,.85)}
 .floating-book:focus-visible,.floating-chat:focus-visible{outline:2px solid #fff;outline-offset:4px}
 @media(max-width:700px){.floating-book{left:14px;bottom:14px;width:148px;height:52px;padding-inline:16px;font-size:10px}.floating-chat{right:14px;bottom:14px;width:52px;height:52px}}
 
