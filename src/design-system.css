@@ -998,3 +998,16 @@ main,.footer--modern,.floating-actions{--color-conversion:var(--color-primary);-
   line-height:1.6;
 }
 @media(max-width:1180px) and (min-width:821px){.hero--cinematic .nav a{font-size:.75rem}}
+
+/* Consistent sport icon family: one padel racket throughout, true tennis ball. */
+.court-card__head .tennis-ball-icon{
+  width:29px;
+  height:29px;
+  margin-left:auto;
+  color:var(--color-ink);
+  flex:0 0 auto;
+}
+.club-overview__feature-icon,
+.hero-benefit-rail .padel-icon{
+  stroke-width:1.55;
+}
