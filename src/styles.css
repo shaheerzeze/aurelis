@@ -112,18 +112,18 @@ body,button,input,textarea,select{font-family:var(--font-ui)}
 /* Hero-only magnetic target cursor */
 @media(pointer:fine) and (prefers-reduced-motion:no-preference){
   .hero--campaign,.hero--campaign *{cursor:none}
-  .hero-target-cursor{position:fixed;z-index:80;left:0;top:0;width:34px;height:34px;pointer-events:none;opacity:0;will-change:transform,width,height;transition:opacity .18s ease,filter .22s ease;filter:drop-shadow(0 0 7px rgba(79,124,255,.55))}
+  .hero-target-cursor{position:fixed;z-index:80;left:0;top:0;width:34px;height:34px;pointer-events:none;opacity:0;will-change:transform,width,height;transition:opacity .18s ease,filter .22s ease;filter:drop-shadow(0 0 7px rgba(223,255,99,.58))}
   .hero-target-cursor.is-visible{opacity:1}
-  .hero-target-cursor i{position:absolute;width:11px;height:11px;border-color:#87A5FF;border-style:solid;transition:border-color .22s ease,filter .22s ease}
+  .hero-target-cursor i{position:absolute;width:11px;height:11px;border-color:#dfff63;border-style:solid;transition:border-color .22s ease,filter .22s ease}
   .hero-target-cursor i:nth-child(1){left:0;top:0;border-width:1.5px 0 0 1.5px}
   .hero-target-cursor i:nth-child(2){right:0;top:0;border-width:1.5px 1.5px 0 0}
   .hero-target-cursor i:nth-child(3){right:0;bottom:0;border-width:0 1.5px 1.5px 0}
   .hero-target-cursor i:nth-child(4){left:0;bottom:0;border-width:0 0 1.5px 1.5px}
-  .hero-target-cursor span{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:#E7EDFF;transform:translate(-50%,-50%);box-shadow:0 0 9px #4F7CFF;transition:opacity .18s ease,transform .18s ease}
-  .hero-target-cursor.is-snapped{filter:drop-shadow(0 0 10px rgba(79,124,255,.72))}
-  .hero-target-cursor.is-snapped i{border-color:#a1ecdd}
+  .hero-target-cursor span{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:#dfff63;transform:translate(-50%,-50%);box-shadow:0 0 9px #dfff63;transition:opacity .18s ease,transform .18s ease}
+  .hero-target-cursor.is-snapped{filter:drop-shadow(0 0 10px rgba(223,255,99,.78))}
+  .hero-target-cursor.is-snapped i{border-color:#dfff63}
   .hero-target-cursor.is-snapped span{opacity:0;transform:translate(-50%,-50%) scale(.2)}
-  .hero-target-cursor.is-pressed{filter:drop-shadow(0 0 14px rgba(161,236,221,.95));transform-origin:center}
+  .hero-target-cursor.is-pressed{filter:drop-shadow(0 0 14px rgba(223,255,99,.95));transform-origin:center}
 }
 @media(pointer:coarse),(prefers-reduced-motion:reduce){.hero-target-cursor{display:none}}
 
