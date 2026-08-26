@@ -54,6 +54,26 @@ const faqs = [
 
 const Arrow = () => <i className="ri-arrow-right-line ui-icon" aria-hidden="true" />
 
+function ProfessionalPadelIcon({ className = '' }) {
+  return <svg className={`padel-icon ${className}`} viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.55" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M16 2.5c-5.15 0-8.85 4.15-8.85 9.65 0 4.55 2.35 7.4 6.15 9.55l.95.55v2.25h3.5v-2.25l.95-.55c3.8-2.15 6.15-5 6.15-9.55C24.85 6.65 21.15 2.5 16 2.5Z" />
+    <path d="M14.25 24.5h3.5v5h-3.5zM13.5 29.5h5" />
+    <g fill="currentColor" stroke="none">
+      <circle cx="13" cy="8.5" r=".7"/><circle cx="16" cy="7.5" r=".7"/><circle cx="19" cy="8.5" r=".7"/>
+      <circle cx="11.5" cy="12" r=".7"/><circle cx="14.5" cy="11" r=".7"/><circle cx="17.5" cy="11" r=".7"/><circle cx="20.5" cy="12" r=".7"/>
+      <circle cx="13" cy="15" r=".7"/><circle cx="16" cy="14.5" r=".7"/><circle cx="19" cy="15" r=".7"/>
+      <circle cx="14.5" cy="18" r=".7"/><circle cx="17.5" cy="18" r=".7"/>
+    </g>
+  </svg>
+}
+
+function TennisBallIcon({ className = '' }) {
+  return <svg className={`tennis-ball-icon ${className}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M5.2 6.1c3.9 1.65 5.7 5.3 5.25 10.9M18.8 17.9c-3.9-1.65-5.7-5.3-5.25-10.9" />
+  </svg>
+}
+
 function PadelIcon({ className = '' }) {
   return (
     <svg className={`padel-icon ${className}`} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -239,7 +259,7 @@ function Hero() {
   const [activeVideo, setActiveVideo] = useState(0)
   const [transitionKey, setTransitionKey] = useState(0)
   const features = [
-    [<PadelOutlineIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
+    [<ProfessionalPadelIcon className="benefit-icon" key="padel" />, 'Premium courts', 'Indoor & outdoor courts'],
     [<BenefitIcon type="coach" key="coach" />, 'Expert coaches', 'Certified for every level'],
     [<BenefitIcon type="events" key="events" />, 'Events & tournaments', 'Competitive play all year'],
     [<BenefitIcon type="community" key="group" />, 'Vibrant community', 'Play, connect and belong'],
@@ -307,13 +327,13 @@ function CourtCard({ court, index, icon, meta }) {
 
   const metaIcons = [asset('icons/players.svg'), asset('icons/levels.svg'), asset('icons/duration.svg')]
   return <motion.article className="court-card" initial={reduceMotion ? false : { opacity: 0, y: 90, scale: .96 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, amount: .22 }} transition={{ type: 'spring', stiffness: 92, damping: 18, delay: reduceMotion ? 0 : index * .14 }} whileHover={reduceMotion ? undefined : { scale: 1.025 }} style={reduceMotion ? undefined : { rotateX, rotateY }} onMouseMove={followPointer} onMouseLeave={resetTilt}>
-    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small>{icon === 'padel' ? <PadelIcon /> : <img src={icon} alt="" decoding="async" />}</div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} loading="lazy" decoding="async" /></div>
+    <div className="court-card__media"><div className="court-card__head"><b>0{index + 1}</b><i /><small>{court.name}</small>{icon === 'padel' ? <ProfessionalPadelIcon /> : <TennisBallIcon />}</div><img className="court-card__photo" src={court.image} alt={`${court.name} players at Aurelis`} loading="lazy" decoding="async" /></div>
     <div className="court-card__body"><div className="court-card__meta">{meta.reduce((items, item, metaIndex) => { if (metaIndex % 2 === 0) items.push(<span key={item}><img src={metaIcons[metaIndex / 2]} alt="" /><b>{item}</b><small>{meta[metaIndex + 1]}</small></span>); return items }, [])}</div><p className="court-card__price"><strong>{court.price}</strong><small>/ hour</small></p><a className="court-card__book" href="#contact"><span>Book now</span><img src={asset('icons/arrow-right.svg')} alt="" /></a></div>
   </motion.article>
 }
 
 function Courts() {
-  const icons = ['padel', 'padel', asset('icons/court-ball.svg')]
+  const icons = ['padel', 'padel', 'tennis']
   const courtMeta = [
     ['4', 'Players', 'All', 'Levels', '60', 'Minutes'],
     ['2', 'Players', 'All', 'Levels', '60', 'Minutes'],
@@ -369,7 +389,7 @@ function ExperienceEditorial() {
       <h2>Aurelis<br /><em>club</em></h2><span className="club-overview__rule" aria-hidden="true" />
       <p>Premium courts, designed for performance.</p>
       <div className="club-overview__features">
-        <article><PadelIcon className="club-overview__feature-icon" /><div><strong>Premium facilities</strong><span>State-of-the-art courts and amenities for the best experience.</span></div></article>
+        <article><ProfessionalPadelIcon className="club-overview__feature-icon" /><div><strong>Premium facilities</strong><span>State-of-the-art courts and amenities for the best experience.</span></div></article>
         <article><img src={asset('icons/players.svg')} alt="" /><div><strong>Expert coaching</strong><span>Programs for every level. Train with the best.</span></div></article>
       </div>
       <a className="club-overview__cta" href="#contact"><span>Register</span><Arrow /></a>
